@@ -5,7 +5,7 @@ import "strings"
 
 templ header(c *PageContext, config map[string]string) {
     <header class="flex flex-row p-4 bg-gray-800 text-gray-100">
-        <a href="/" class="w-64 flex items-center space-x-2 hover:text-gray-300">
+        <a href={ config["base_url"] } class="w-64 flex items-center space-x-2 hover:text-gray-300">
             <h1 class="text-2xl font-bold">
                 <img src={ config["base_url"] + "/logo.svg" } alt="Templ" class="h-12 w-52" />
             </h1>
