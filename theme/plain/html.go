@@ -17,9 +17,9 @@ func HTML(s string) templ.Component {
 
 func script(config map[string]string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
-		baseUrl := config["base_url"]
+		baseURL := config["base_url"]
 
-		s := "<script>var base_url = '" + baseUrl + "';</script>"
+		s := "<script>var base_url = '" + baseURL + "';</script>"
 
 		_, err := io.WriteString(w, s)
 
