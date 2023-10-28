@@ -3,14 +3,13 @@ install:
 	@echo "Installing..."
 	go install github.com/a-h/templ/cmd/templ@latest
 	npm install -g tailwindcss@latest
-	npm install -D tailwindcss@latest
+	npm install -D tailwindcss@latest @tailwindcss/typography
 
 .PHONY: install-dev
-install-dev:
+install-dev: install
 	@echo "Installing..."
-	go install github.com/niklasfasching/templ/cmd/templ@latest
-	npm install -g tailwindcss@latest postcss@latest autoprefixer@latest
-	npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+	npm install -g postcss@latest autoprefixer@latest
+	npm install -D postcss@latest autoprefixer@latest
 	npm install -g live-server@latest
 	npm install -D live-server@latest
 	go install github.com/cosmtrek/air@latest
