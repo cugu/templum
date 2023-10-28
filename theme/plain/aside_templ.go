@@ -4,15 +4,12 @@ package plain
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 
-import (
-	"bytes"
-	"context"
-	"io"
+import "github.com/a-h/templ"
+import "context"
+import "io"
+import "bytes"
 
-	"github.com/a-h/templ"
-
-	"github.com/cugu/templum"
-)
+import "github.com/cugu/templum"
 
 func aside(c *pageContext, config map[string]string, pages []*templum.Page) templ.Component {
 	return templ.ComponentFunc(func(templ_7745c5c3_Ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
@@ -21,35 +18,27 @@ func aside(c *pageContext, config map[string]string, pages []*templum.Page) temp
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
-
 		templ_7745c5c3_Ctx = templ.InitializeContext(templ_7745c5c3_Ctx)
-
 		templ_7745c5c3_Var1 := templ.GetChildren(templ_7745c5c3_Ctx)
 		if templ_7745c5c3_Var1 == nil {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
-
 		templ_7745c5c3_Ctx = templ.ClearChildren(templ_7745c5c3_Ctx)
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<aside class=\"flex flex-col min-h-screen p-4 bg-gray-900 text-gray-100 space-y-2 w-64 overflow-y-auto\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		templ_7745c5c3_Err = nav(c, config, pages, 0).Render(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</aside>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
-
 		return templ_7745c5c3_Err
 	})
 }

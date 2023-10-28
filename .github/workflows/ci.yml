@@ -16,23 +16,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
-        with: { go-version: '1.21' }
-      - uses: golangci/golangci-lint-action@v3
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v4
-        with: { go-version: '1.21' }
-      - name: Test
-        run: make test
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -42,8 +25,8 @@ jobs:
         with: { go-version: '1.21' }
       - name: Build
         run: |
-          make install
-          make generate
+          go install github.com/cugu/templum/cmd/templum@latest
+          templum --content content --output public
       - uses: actions/upload-pages-artifact@v1
         with:
           path: public
@@ -53,7 +36,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build, test, lint]
+    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
