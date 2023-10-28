@@ -14,9 +14,9 @@ type Theme interface {
 	Render(ctx context.Context, content Content) (fs.FS, error)
 }
 
-type pageType int
+type PageType int
 
 const (
-	Section pageType = iota
+	Section PageType = iota
 	Markdown
 )

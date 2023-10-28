@@ -4,12 +4,14 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"io/fs"
 	"os"
-	"tempel"
-	_default "tempel/theme/default"
 	"testing/fstest"
+
+	"gopkg.in/yaml.v3"
+
+	"github.com/cugu/tempel"
+	"github.com/cugu/tempel/theme/plain"
 )
 
 func main() {
@@ -22,14 +24,16 @@ func generateCmd(ctx context.Context, args []string) {
 	outputPathFlag := cmd.String("output", "public", "filesystem path to output directory (default: 'public')")
 	helpFlag := cmd.Bool("help", false, "Print help and exit.")
 	err := cmd.Parse(args)
+
 	if err != nil || *helpFlag {
 		cmd.PrintDefaults()
+
 		return
 	}
 
 	err = generate(ctx, *contentPathFlag, *outputPathFlag)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println(err.Error()) //nolint:forbidigo
 		os.Exit(1)
 	}
 }
@@ -67,6 +71,7 @@ func config(fsys fs.FS) (map[string]string, error) {
 	if err := yaml.NewDecoder(f).Decode(&config); err != nil {
 		return nil, err
 	}
+
 	return config, nil
 }
 
@@ -86,11 +91,13 @@ func docFS(ctx context.Context, fsys fs.FS, config map[string]string) (fs.FS, er
 		Config: config,
 	}
 
-	t := _default.DefaultTheme{}
+	t := plain.Theme{}
+
 	docFS, err := t.Render(ctx, content)
 	if err != nil {
 		return nil, err
 	}
+
 	return docFS, nil
 }
 

@@ -3,22 +3,23 @@ package tempel
 import (
 	"bytes"
 	"errors"
-	"github.com/yuin/goldmark"
-	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/renderer/html"
-	"go.abhg.dev/goldmark/mermaid"
 	"io/fs"
-	"mvdan.cc/xurls/v2"
 	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/renderer/html"
+	"go.abhg.dev/goldmark/mermaid"
+	"mvdan.cc/xurls/v2"
 )
 
 type Page struct {
 	fsys     fs.FS
 	path     string
-	pageType pageType
+	pageType PageType
 
 	SubPages []*Page
 }
@@ -38,7 +39,7 @@ func NewSectionPage(path string) *Page {
 	}
 }
 
-func (p *Page) Type() pageType {
+func (p *Page) Type() PageType {
 	return p.pageType
 }
 
@@ -74,6 +75,7 @@ func baseParts(path string) (string, int) {
 		if err != nil {
 			return suffix, -1
 		}
+
 		return suffix, o
 	}
 
@@ -97,6 +99,7 @@ func (p *Page) Slug() string {
 	for _, r := range []string{"\\", " ", ".", "_"} {
 		htmlPath = strings.ReplaceAll(htmlPath, r, "-")
 	}
+
 	htmlPath = strings.ToLower(htmlPath)
 	htmlPath = strings.Trim(htmlPath, "-")
 

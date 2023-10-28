@@ -1,0 +1,21 @@
+package plain
+
+import "github.com/cugu/tempel"
+
+templ nav(c *PageContext, config map[string]string, pages []*tempel.Page, depth int) {
+    <nav
+        class={
+            "flex",
+            "flex-col",
+             "space-y-2",
+              templ.KV("pt-2", depth > 0),
+        }>
+        for _, page := range pages {
+            if page.Type() == tempel.Section {
+                @section(c, config, page, depth)
+            } else {
+                @link(c, config, page, depth)
+            }
+        }
+    </nav>
+}

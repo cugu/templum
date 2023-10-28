@@ -1,0 +1,22 @@
+package plain
+
+import "github.com/cugu/tempel"
+import "strings"
+
+templ link(c *PageContext, config map[string]string, page *tempel.Page, depth int) {
+    <a
+        id={ page.Slug() }
+        href={ templ.URL(config["base_url"] + page.Href()) }
+        class={
+            "block",
+            "p-2",
+            "rounded",
+            "w-full",
+            templ.SafeClass("hover:bg-gray-700"),
+            templ.KV("font-bold", strings.HasPrefix(c.Active, page.Slug())),
+            templ.KV("font-normal", !strings.HasPrefix(c.Active, page.Slug())),
+            templ.KV("bg-gray-700", c.Active == page.Slug()),
+        }>
+        { page.Title() }
+    </a>
+}

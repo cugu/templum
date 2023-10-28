@@ -1,0 +1,32 @@
+run:
+  go: "1.21"
+  timeout: 5m
+  tests: false
+linters:
+  enable-all: true
+  disable:
+    - deadcode
+    - depguard
+    - errchkjson
+    - exhaustivestruct
+    - exhaustruct
+    - goconst
+    - goerr113
+    - golint
+    - gomnd
+    - ifshort
+    - interfacer
+    - ireturn
+    - maligned
+    - nosnakecase
+    - scopelint
+    - structcheck
+    - varcheck
+    - varnamelen
+    - wrapcheck
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(github.com/cugu/tempel)

@@ -1,40 +1,26 @@
-package _default
+package plain
 
 import (
 	"bytes"
 	"context"
-	_ "embed"
 	"encoding/json"
 	"io/fs"
 	"maps"
-	"tempel"
 	"testing/fstest"
+
+	"github.com/cugu/tempel"
+	"github.com/cugu/tempel/theme/plain/static"
 )
 
-//go:embed style.css
-var css []byte
+var _ tempel.Theme = Theme{}
 
-//go:embed main.js
-var js []byte
-
-//go:embed prism.js
-var prismJS []byte
-
-//go:embed prism.css
-var prismCSS []byte
-
-//go:embed prism-include-languages.js
-var prismIncludeLanguages []byte
-
-var _ tempel.Theme = DefaultTheme{}
-
-type DefaultTheme struct{}
+type Theme struct{}
 
 type PageContext struct {
 	Active string
 }
 
-func (t DefaultTheme) Render(ctx context.Context, content tempel.Content) (fs.FS, error) {
+func (t Theme) Render(ctx context.Context, content tempel.Content) (fs.FS, error) {
 	memoryFS := fstest.MapFS{}
 
 	files, err := toFiles(ctx, content, content.Pages)
@@ -44,12 +30,12 @@ func (t DefaultTheme) Render(ctx context.Context, content tempel.Content) (fs.FS
 
 	maps.Copy(memoryFS, files)
 
-	memoryFS["style.css"] = &fstest.MapFile{Data: css}
+	memoryFS["style.css"] = &fstest.MapFile{Data: static.CSS}
 	memoryFS["search.js"] = &fstest.MapFile{Data: searchJS(content)}
-	memoryFS["main.js"] = &fstest.MapFile{Data: js}
-	memoryFS["prism.js"] = &fstest.MapFile{Data: prismJS}
-	memoryFS["prism.css"] = &fstest.MapFile{Data: prismCSS}
-	memoryFS["prism-include-languages.js"] = &fstest.MapFile{Data: prismIncludeLanguages}
+	memoryFS["main.js"] = &fstest.MapFile{Data: static.JS}
+	memoryFS["prism.js"] = &fstest.MapFile{Data: static.PrismJS}
+	memoryFS["prism.css"] = &fstest.MapFile{Data: static.PrismCSS}
+	memoryFS["prism-include-languages.js"] = &fstest.MapFile{Data: static.PrismIncludeLanguages}
 
 	return memoryFS, nil
 }
@@ -64,6 +50,7 @@ func searchJS(content tempel.Content) []byte {
 
 func searchIndex(pages []*tempel.Page) []map[string]string {
 	var data []map[string]string
+
 	for _, p := range pages {
 		if p.Type() == tempel.Markdown {
 			md, err := p.Markdown()
@@ -74,7 +61,7 @@ func searchIndex(pages []*tempel.Page) []map[string]string {
 			data = append(data, map[string]string{
 				"title": p.Title(),
 				"href":  p.Href(),
-				"body":  string(md),
+				"body":  md,
 			})
 		}
 

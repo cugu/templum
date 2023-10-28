@@ -1,14 +1,16 @@
-package _default
+package plain
 
 import (
 	"context"
-	"github.com/a-h/templ"
 	"io"
+
+	"github.com/a-h/templ"
 )
 
 func HTML(s string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
 		_, err := io.WriteString(w, s)
+
 		return err
 	})
 }

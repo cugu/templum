@@ -5,7 +5,8 @@ import (
 	"path/filepath"
 	"slices"
 	"strings"
-	"tempel"
+
+	"github.com/cugu/tempel"
 )
 
 func newPages(fsys fs.FS, root string) ([]*tempel.Page, error) {

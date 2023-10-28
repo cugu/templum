@@ -16,7 +16,7 @@ func writeToDisk(fsyss []fs.FS, outputPath string) error {
 		}
 	}
 
-	if err := os.MkdirAll(outputPath, 0755); err != nil {
+	if err := os.MkdirAll(outputPath, 0o755); err != nil {
 		return err
 	}
 
@@ -36,7 +36,7 @@ func writeToDisk(fsyss []fs.FS, outputPath string) error {
 			}
 			defer f.Close()
 
-			os.MkdirAll(filepath.Dir(filepath.Join(outputPath, path)), 0755)
+			_ = os.MkdirAll(filepath.Dir(filepath.Join(outputPath, path)), 0o755)
 
 			out, err := os.Create(filepath.Join(outputPath, path))
 			if err != nil {
@@ -44,6 +44,7 @@ func writeToDisk(fsyss []fs.FS, outputPath string) error {
 			}
 			defer out.Close()
 			_, err = io.Copy(out, f)
+
 			return err
 		}); err != nil {
 			return err

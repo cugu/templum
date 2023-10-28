@@ -1,0 +1,9 @@
+package plain
+
+import "github.com/cugu/tempel"
+
+templ aside(c *PageContext, config map[string]string, pages []*tempel.Page) {
+    <aside class="flex flex-col min-h-screen p-4 bg-gray-900 text-gray-100 space-y-2 w-64 overflow-y-auto">
+        @nav(c, config, pages, 0)
+    </aside>
+}

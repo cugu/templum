@@ -8,6 +8,7 @@ func TestPage_Slug(t *testing.T) {
 	type fields struct {
 		path string
 	}
+
 	tests := []struct {
 		name   string
 		fields fields

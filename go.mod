@@ -1,4 +1,4 @@
-module tempel
+module github.com/cugu/tempel
 
 go 1.21.1
 

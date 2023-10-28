@@ -1,0 +1,36 @@
+package plain
+
+import "github.com/cugu/tempel"
+
+templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html string) {
+    <html>
+        <head>
+            <title>Index</title>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link href={ config["base_url"] + "style.css" } rel="stylesheet" />
+            <link href={ config["base_url"] + "prism.css" } rel="stylesheet" />
+        </head>
+        <body class="flex flex-col flex-1 min-h-screen">
+            @header(c, config)
+            <div class="flex flex-row flex-1">
+                @aside(c, config, pages)
+                <section id="search-results" class="hidden flex-1 p-4 max-w-prose">
+                    <div class="prose">
+                        <h1>
+                            Search results
+                        </h1>
+                    </div>
+                    <div id="search-results-list"></div>
+                </section>
+                <main id="main" class="flex-1 p-4 prose">
+                    @HTML(html)
+                </main>
+            </div>
+            <script src={ config["base_url"] + "prism.js" }></script>
+            <script src={ config["base_url"] + "prism-include-languages.js" }></script>
+            <script src={ config["base_url"] + "search.js" }></script>
+            <script src={ config["base_url"] + "main.js" }></script>
+        </body>
+    </html>
+}
