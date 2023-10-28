@@ -22,7 +22,7 @@ generate:
 	@echo "Generating..."
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
-	go run ./cmd/tempel/. --content content --output public
+	go run ./cmd/templum/. --content content --output public
 
 .PHONY: watch
 watch:

@@ -1,11 +1,13 @@
-# tempel
+<img src="templum.png" width="400" height="400" align="right">
+
+# templum
 
 A static site generator for [templ](https://github.com/a-h/templ).
 
 ## Install
 
 ```bash
-go install github.com/cugu/templum/cmd/tempel@latest
+go install github.com/cugu/templum/cmd/templum@latest
 ```
 
 ## Usage
@@ -13,12 +15,12 @@ go install github.com/cugu/templum/cmd/tempel@latest
 Generate a site from the `content` folder to the `public` folder:
 
 ```bash
-tempel --content content --output public
+templum --content content --output public
 ``` 
 
 ## Content
 
-Content is written in [Markdown](https://www.markdownguide.org/cheat-sheet/). 
+Content is written in [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
 The content directory structure is:
 
@@ -46,7 +48,7 @@ base_url: "https://example.com/site/"
 
 ### docs
 
-The `docs` folder contains the content of the site. 
+The `docs` folder contains the content of the site.
 The folder structure is used to create the navigation.
 Number prefixes are used to order the pages and are removed from the navigation.
 
