@@ -3,7 +3,7 @@ package plain
 import "github.com/cugu/tempel"
 import "strings"
 
-templ section(c *PageContext, config map[string]string, page *tempel.Page, depth int) {
+templ section(c *pageContext, config map[string]string, page *tempel.Page, depth int) {
     <div
         id={ page.Slug() }
         class={
@@ -32,10 +32,10 @@ templ section(c *PageContext, config map[string]string, page *tempel.Page, depth
             </svg>
         </div>
 
-        if len(page.SubPages) > 0 {
+        if len(page.Children()) > 0 {
             <div class="wrapper">
                 <div class="pl-1 inner">
-                     @nav(c, config, page.SubPages, depth + 1)
+                     @nav(c, config, page.Children(), depth + 1)
                 </div>
             </div>
         }

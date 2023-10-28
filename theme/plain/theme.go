@@ -16,7 +16,7 @@ var _ tempel.Theme = Theme{}
 
 type Theme struct{}
 
-type PageContext struct {
+type pageContext struct {
 	Active string
 }
 
@@ -66,7 +66,7 @@ func searchIndex(pages []*tempel.Page) []map[string]string {
 		}
 
 		if p.Type() == tempel.Section {
-			data = append(data, searchIndex(p.SubPages)...)
+			data = append(data, searchIndex(p.Children())...)
 		}
 	}
 
@@ -87,7 +87,7 @@ func toFiles(ctx context.Context, content tempel.Content, pages []*tempel.Page) 
 		}
 
 		if p.Type() == tempel.Section {
-			subFiles, err := toFiles(ctx, content, p.SubPages)
+			subFiles, err := toFiles(ctx, content, p.Children())
 			if err != nil {
 				return nil, err
 			}
@@ -105,7 +105,7 @@ func toFile(ctx context.Context, content tempel.Content, p *tempel.Page) (*fstes
 		return nil, err
 	}
 
-	context := &PageContext{
+	context := &pageContext{
 		Active: p.Slug(),
 	}
 

@@ -1,16 +1,14 @@
-package main
+package tempel
 
 import (
 	"io/fs"
 	"path/filepath"
 	"slices"
 	"strings"
-
-	"github.com/cugu/tempel"
 )
 
-func newPages(fsys fs.FS, root string) ([]*tempel.Page, error) {
-	var pages []*tempel.Page
+func newPages(fsys fs.FS, root string) ([]*Page, error) {
+	var pages []*Page
 
 	entries, err := fs.ReadDir(fsys, root)
 	if err != nil {
@@ -26,18 +24,18 @@ func newPages(fsys fs.FS, root string) ([]*tempel.Page, error) {
 
 		switch {
 		case entry.IsDir():
-			section := tempel.NewSectionPage(path)
+			section := NewSectionPage(path)
 
 			subPages, err := newPages(fsys, path)
 			if err != nil {
 				return nil, err
 			}
 
-			section.SubPages = subPages
+			section.AddChildren(subPages...)
 
 			pages = append(pages, section)
 		case filepath.Ext(entry.Name()) == ".md":
-			pages = append(pages, tempel.NewMarkdownPage(fsys, path))
+			pages = append(pages, NewMarkdownPage(fsys, path))
 		default:
 			continue
 		}
@@ -48,7 +46,7 @@ func newPages(fsys fs.FS, root string) ([]*tempel.Page, error) {
 	return pages, nil
 }
 
-func sortPages(a, b *tempel.Page) int {
+func sortPages(a, b *Page) int {
 	if a.Order() == b.Order() {
 		return strings.Compare(a.Title(), b.Title())
 	}

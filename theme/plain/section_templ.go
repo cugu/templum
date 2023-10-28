@@ -12,7 +12,7 @@ import "bytes"
 import "github.com/cugu/tempel"
 import "strings"
 
-func section(c *PageContext, config map[string]string, page *tempel.Page, depth int) templ.Component {
+func section(c *pageContext, config map[string]string, page *tempel.Page, depth int) templ.Component {
 	return templ.ComponentFunc(func(templ_7745c5c3_Ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -99,12 +99,12 @@ func section(c *PageContext, config map[string]string, page *tempel.Page, depth 
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if len(page.SubPages) > 0 {
+		if len(page.Children()) > 0 {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"wrapper\"><div class=\"pl-1 inner\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = nav(c, config, page.SubPages, depth+1).Render(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = nav(c, config, page.Children(), depth+1).Render(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

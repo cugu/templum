@@ -11,7 +11,7 @@ import "bytes"
 
 import "github.com/cugu/tempel"
 
-func nav(c *PageContext, config map[string]string, pages []*tempel.Page, depth int) templ.Component {
+func nav(c *pageContext, config map[string]string, pages []*tempel.Page, depth int) templ.Component {
 	return templ.ComponentFunc(func(templ_7745c5c3_Ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {

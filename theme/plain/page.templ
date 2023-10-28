@@ -2,7 +2,7 @@ package plain
 
 import "github.com/cugu/tempel"
 
-templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html string) {
+templ page(c *pageContext, config map[string]string, pages []*tempel.Page, content string) {
     <html>
         <head>
             <title>Index</title>
@@ -24,7 +24,7 @@ templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html 
                     <div id="search-results-list"></div>
                 </section>
                 <main id="main" class="flex-1 p-4 prose">
-                    @HTML(html)
+                    @html(content)
                 </main>
             </div>
             @script(config)

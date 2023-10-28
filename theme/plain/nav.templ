@@ -2,7 +2,7 @@ package plain
 
 import "github.com/cugu/tempel"
 
-templ nav(c *PageContext, config map[string]string, pages []*tempel.Page, depth int) {
+templ nav(c *pageContext, config map[string]string, pages []*tempel.Page, depth int) {
     <nav
         class={
             "flex",

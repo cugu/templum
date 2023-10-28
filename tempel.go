@@ -7,6 +7,7 @@ import (
 
 type Content struct {
 	Config map[string]string
+	Static fs.FS
 	Pages  []*Page
 }
 

@@ -11,7 +11,7 @@ import "bytes"
 
 import "github.com/cugu/tempel"
 
-func page(c *PageContext, config map[string]string, pages []*tempel.Page, html string) templ.Component {
+func page(c *pageContext, config map[string]string, pages []*tempel.Page, content string) templ.Component {
 	return templ.ComponentFunc(func(templ_7745c5c3_Ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -78,7 +78,7 @@ func page(c *PageContext, config map[string]string, pages []*tempel.Page, html s
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = HTML(html).Render(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = html(content).Render(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

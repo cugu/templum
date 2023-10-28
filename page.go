@@ -21,7 +21,7 @@ type Page struct {
 	path     string
 	pageType PageType
 
-	SubPages []*Page
+	children []*Page
 }
 
 func NewMarkdownPage(fsys fs.FS, path string) *Page {
@@ -155,4 +155,12 @@ func (p *Page) HTML() (string, error) {
 	}
 
 	return htmlBuffer.String(), nil
+}
+
+func (p *Page) AddChildren(child ...*Page) {
+	p.children = append(p.children, child...)
+}
+
+func (p *Page) Children() []*Page {
+	return p.children
 }

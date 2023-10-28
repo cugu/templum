@@ -3,7 +3,7 @@ package plain
 import "github.com/cugu/tempel"
 import "strings"
 
-templ link(c *PageContext, config map[string]string, page *tempel.Page, depth int) {
+templ link(c *pageContext, config map[string]string, page *tempel.Page, depth int) {
     <a
         id={ page.Slug() }
         href={ templ.URL(config["base_url"] + page.Href()) }
