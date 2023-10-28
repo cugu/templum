@@ -27,6 +27,9 @@ templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html 
                     @HTML(html)
                 </main>
             </div>
+            <script>
+                let config = { config };
+            </script>
             <script src={ config["base_url"] + "prism.js" }></script>
             <script src={ config["base_url"] + "prism-include-languages.js" }></script>
             <script src={ config["base_url"] + "search.js" }></script>

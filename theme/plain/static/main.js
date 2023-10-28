@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function searchresult(title, url, excerptPrefix, term, excerptSuffix, pos) {
     let a = document.createElement('a');
-    a.setAttribute('href', "/" + url);
+    a.setAttribute('href', config["base_url"] + url);
 
     let div = document.createElement('div');
     div.classList.add('flex', 'flex-col', 'gap-x-6', 'mt-2', 'p-5', 'bg-gray-100', 'rounded', 'hover:bg-gray-200');
