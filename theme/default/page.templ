@@ -3,11 +3,11 @@ package _default
 import "tempel"
 import "strings"
 
-templ header() {
+templ header(c *PageContext, config map[string]string) {
     <header class="flex flex-row p-4 bg-gray-800 text-gray-100">
         <a href="/" class="w-64 flex items-center space-x-2 hover:text-gray-300">
             <h1 class="text-2xl font-bold">
-                <img src="/logo.svg" alt="Templ" class="h-12 w-52" />
+                <img src={ config["base_url"] + "/logo.svg" } alt="Templ" class="h-12 w-52" />
             </h1>
         </a>
 
@@ -31,13 +31,13 @@ templ header() {
     </header>
 }
 
-templ aside(c *PageContext, pages []*tempel.Page) {
+templ aside(c *PageContext, config map[string]string, pages []*tempel.Page) {
     <aside class="flex flex-col min-h-screen p-4 bg-gray-900 text-gray-100 space-y-2 w-64 overflow-y-auto">
-        @nav(c, pages, 0)
+        @nav(c, config, pages, 0)
     </aside>
 }
 
-templ nav(c *PageContext, pages []*tempel.Page, depth int) {
+templ nav(c *PageContext, config map[string]string, pages []*tempel.Page, depth int) {
     <nav
         class={
             "flex",
@@ -47,15 +47,15 @@ templ nav(c *PageContext, pages []*tempel.Page, depth int) {
         }>
         for _, page := range pages {
             if page.Type() == tempel.Section {
-                @section(c, page, depth)
+                @section(c, config, page, depth)
             } else {
-                @link(c, page, depth)
+                @link(c, config, page, depth)
             }
         }
     </nav>
 }
 
-templ section(c *PageContext, page *tempel.Page, depth int) {
+templ section(c *PageContext, config map[string]string, page *tempel.Page, depth int) {
     <div
         id={ page.Slug() }
         class={
@@ -87,17 +87,17 @@ templ section(c *PageContext, page *tempel.Page, depth int) {
         if len(page.SubPages) > 0 {
             <div class="wrapper">
                 <div class="pl-1 inner">
-                     @nav(c, page.SubPages, depth + 1)
+                     @nav(c, config, page.SubPages, depth + 1)
                 </div>
             </div>
         }
     </div>
 }
 
-templ link(c *PageContext, page *tempel.Page, depth int) {
+templ link(c *PageContext, config map[string]string, page *tempel.Page, depth int) {
     <a
         id={ page.Slug() }
-        href={ templ.URL("/" + page.Href()) }
+        href={ templ.URL(config["base_url"] + page.Href()) }
         class={
             "block",
             "p-2",
@@ -112,22 +112,6 @@ templ link(c *PageContext, page *tempel.Page, depth int) {
     </a>
 }
 
-templ searchresult(title, url, excerpt string) {
-    <a href={ templ.URL(url) } >
-        <div class="flex justify-between gap-x-6 mt-2 p-5 bg-gray-100 rounded hover:bg-gray-200">
-            <div class="flex min-w-0 gap-x-4">
-                <div class="min-w-0 flex-auto">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">{ title }</p>
-                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">{ excerpt }</p>
-                </div>
-            </div>
-            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                <p class="text-sm leading-6 text-gray-900">{ url }</p>
-            </div>
-        </div>
-    </a>
-}
-
 templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html string) {
     <html>
         <head>
@@ -138,19 +122,16 @@ templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html 
             <link href={ config["base_url"] + "prism.css" } rel="stylesheet" />
         </head>
         <body class="flex flex-col flex-1 min-h-screen">
-            @header()
+            @header(c, config)
             <div class="flex flex-row flex-1">
-                @aside(c, pages)
+                @aside(c, config, pages)
                 <section id="search-results" class="hidden flex-1 p-4 max-w-prose">
                     <div class="prose">
                         <h1>
                             Search results
                         </h1>
                     </div>
-                    <div id="search-results-list">
-                        @searchresult("Index", "index.html", "…this is the excerpt…")
-                        @searchresult("Index", "index.html", "…this is the excerpt…")
-                    </div>
+                    <div id="search-results-list"></div>
                 </section>
                 <main id="main" class="flex-1 p-4 prose">
                     @HTML(html)
