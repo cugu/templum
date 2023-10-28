@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"gopkg.in/yaml.v3"
 	"io/fs"
 	"os"
 	"tempel"
@@ -36,7 +37,12 @@ func generateCmd(ctx context.Context, args []string) {
 func generate(ctx context.Context, contentPath, outputPath string) error {
 	fsys := os.DirFS(contentPath)
 
-	docFS, err := docFS(ctx, fsys)
+	config, err := config(fsys)
+	if err != nil {
+		return err
+	}
+
+	docFS, err := docFS(ctx, fsys, config)
 	if err != nil {
 		return err
 	}
@@ -49,7 +55,22 @@ func generate(ctx context.Context, contentPath, outputPath string) error {
 	return writeToDisk([]fs.FS{docFS, staticFS}, outputPath)
 }
 
-func docFS(ctx context.Context, fsys fs.FS) (fs.FS, error) {
+func config(fsys fs.FS) (map[string]string, error) {
+	var config map[string]string
+
+	f, err := fsys.Open("config.yaml")
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	if err := yaml.NewDecoder(f).Decode(&config); err != nil {
+		return nil, err
+	}
+	return config, nil
+}
+
+func docFS(ctx context.Context, fsys fs.FS, config map[string]string) (fs.FS, error) {
 	docs, err := fs.Sub(fsys, "docs")
 	if err != nil {
 		return nil, err
@@ -61,7 +82,8 @@ func docFS(ctx context.Context, fsys fs.FS) (fs.FS, error) {
 	}
 
 	content := tempel.Content{
-		Pages: pages,
+		Pages:  pages,
+		Config: config,
 	}
 
 	t := _default.DefaultTheme{}

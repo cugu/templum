@@ -6,7 +6,7 @@ import (
 )
 
 type Content struct {
-	Config map[string]any
+	Config map[string]string
 	Pages  []*Page
 }
 

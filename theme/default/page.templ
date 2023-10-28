@@ -128,14 +128,14 @@ templ searchresult(title, url, excerpt string) {
     </a>
 }
 
-templ page(c *PageContext, config map[string]any, pages []*tempel.Page, html string) {
+templ page(c *PageContext, config map[string]string, pages []*tempel.Page, html string) {
     <html>
         <head>
             <title>Index</title>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link href="/style.css" rel="stylesheet" />
-            <link href="/prism.css" rel="stylesheet" />
+            <link href={ config["base_url"] + "style.css" } rel="stylesheet" />
+            <link href={ config["base_url"] + "prism.css" } rel="stylesheet" />
         </head>
         <body class="flex flex-col flex-1 min-h-screen">
             @header()
@@ -156,10 +156,10 @@ templ page(c *PageContext, config map[string]any, pages []*tempel.Page, html str
                     @HTML(html)
                 </main>
             </div>
-            <script src="/prism.js"></script>
-            <script src="/prism-include-languages.js"></script>
-            <script src="/search.js"></script>
-            <script src="/main.js"></script>
+            <script src={ config["base_url"] + "prism.js" }></script>
+            <script src={ config["base_url"] + "prism-include-languages.js" }></script>
+            <script src={ config["base_url"] + "search.js" }></script>
+            <script src={ config["base_url"] + "main.js" }></script>
         </body>
     </html>
 }
