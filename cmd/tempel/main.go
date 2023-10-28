@@ -4,12 +4,11 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"io"
 	"io/fs"
 	"os"
-	"path/filepath"
 	"tempel"
 	_default "tempel/theme/default"
+	"testing/fstest"
 )
 
 func main() {
@@ -36,39 +35,52 @@ func generateCmd(ctx context.Context, args []string) {
 
 func generate(ctx context.Context, contentPath, outputPath string) error {
 	fsys := os.DirFS(contentPath)
-	docs, err := fs.Sub(fsys, "docs")
+
+	docFS, err := docFS(ctx, fsys)
 	if err != nil {
 		return err
+	}
+
+	staticFS, err := staticFS(fsys)
+	if err != nil {
+		return err
+	}
+
+	return writeToDisk([]fs.FS{docFS, staticFS}, outputPath)
+}
+
+func docFS(ctx context.Context, fsys fs.FS) (fs.FS, error) {
+	docs, err := fs.Sub(fsys, "docs")
+	if err != nil {
+		return nil, err
+	}
+
+	pages, err := newPages(docs, ".")
+	if err != nil {
+		return nil, err
 	}
 
 	content := tempel.Content{
-		Config: map[string]interface{}{},
-		Docs:   docs,
+		Pages: pages,
 	}
 
 	t := _default.DefaultTheme{}
-	out, err := t.Render(ctx, content)
+	docFS, err := t.Render(ctx, content)
 	if err != nil {
-		return err
+		return nil, err
 	}
-
-	return writeToDisk(out, outputPath)
+	return docFS, nil
 }
 
-func writeToDisk(out fs.FS, outputPath string) error {
-	// remove all files and folder in public
-	entries, err := os.ReadDir(outputPath)
-	if err == nil {
-		for _, entry := range entries {
-			os.RemoveAll(filepath.Join(outputPath, entry.Name()))
-		}
+func staticFS(fsys fs.FS) (fs.FS, error) {
+	static, err := fs.Sub(fsys, "static")
+	if err != nil {
+		return nil, err
 	}
 
-	if err := os.MkdirAll(outputPath, 0755); err != nil {
-		return err
-	}
+	out := fstest.MapFS{}
 
-	if err := fs.WalkDir(out, ".", func(path string, d fs.DirEntry, err error) error {
+	err = fs.WalkDir(static, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -77,24 +89,18 @@ func writeToDisk(out fs.FS, outputPath string) error {
 			return nil
 		}
 
-		f, err := out.Open(path)
+		b, err := fs.ReadFile(static, path)
 		if err != nil {
 			return err
 		}
-		defer f.Close()
 
-		os.MkdirAll(filepath.Dir(filepath.Join(outputPath, path)), 0755)
+		out[path] = &fstest.MapFile{Data: b}
 
-		out, err := os.Create(filepath.Join(outputPath, path))
-		if err != nil {
-			return err
-		}
-		defer out.Close()
-		_, err = io.Copy(out, f)
-		return err
-	}); err != nil {
-		return err
+		return nil
+	})
+	if err != nil {
+		return nil, err
 	}
 
-	return nil
+	return out, nil
 }

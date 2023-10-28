@@ -7,9 +7,16 @@ import (
 
 type Content struct {
 	Config map[string]any
-	Docs   fs.FS
+	Pages  []*Page
 }
 
 type Theme interface {
 	Render(ctx context.Context, content Content) (fs.FS, error)
 }
+
+type pageType int
+
+const (
+	Section pageType = iota
+	Markdown
+)

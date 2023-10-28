@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.toggle {
-    cursor: pointer;
-}
-
 .wrapper {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s ease-out;
+    transition: grid-template-rows 0.2s ease-out;
 }
 
-.is-active .wrapper {
+.active > .wrapper {
     grid-template-rows: 1fr;
 }
 
@@ -22,9 +18,9 @@
 
 .chevron {
     transform: rotate(-90deg);
-    transition: transform 0.5s ease-out;
+    transition: grid-template-rows 0.2s ease-out;
 }
 
-.is-active .chevron {
+.active > div > .chevron {
     transform: rotate(0deg);
 }
