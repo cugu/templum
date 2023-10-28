@@ -14,3 +14,15 @@ func HTML(s string) templ.Component {
 		return err
 	})
 }
+
+func script(config map[string]string) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		baseUrl := config["base_url"]
+
+		s := "<script>var base_url = '" + baseUrl + "';</script>"
+
+		_, err := io.WriteString(w, s)
+
+		return err
+	})
+}
