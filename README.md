@@ -5,7 +5,7 @@ A static site generator for [templ](https://github.com/a-h/templ).
 ## Install
 
 ```bash
-go install github.com/cugu/tempel/cmd/tempel@latest
+go install github.com/cugu/templum/cmd/tempel@latest
 ```
 
 ## Usage

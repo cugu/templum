@@ -1,4 +1,4 @@
-module github.com/cugu/tempel
+module github.com/cugu/templum
 
 go 1.21.1
 

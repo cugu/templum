@@ -8,11 +8,11 @@ import (
 	"maps"
 	"testing/fstest"
 
-	"github.com/cugu/tempel"
-	"github.com/cugu/tempel/theme/plain/static"
+	"github.com/cugu/templum"
+	"github.com/cugu/templum/theme/plain/static"
 )
 
-var _ tempel.Theme = Theme{}
+var _ templum.Theme = Theme{}
 
 type Theme struct{}
 
@@ -20,7 +20,7 @@ type pageContext struct {
 	Active string
 }
 
-func (t Theme) Render(ctx context.Context, content tempel.Content) (fs.FS, error) {
+func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, error) {
 	memoryFS := fstest.MapFS{}
 
 	files, err := toFiles(ctx, content, content.Pages)
@@ -40,7 +40,7 @@ func (t Theme) Render(ctx context.Context, content tempel.Content) (fs.FS, error
 	return memoryFS, nil
 }
 
-func searchJS(content tempel.Content) []byte {
+func searchJS(content templum.Content) []byte {
 	data := searchIndex(content.Pages)
 
 	b, _ := json.Marshal(data)
@@ -48,11 +48,11 @@ func searchJS(content tempel.Content) []byte {
 	return []byte("var index = " + string(b) + ";")
 }
 
-func searchIndex(pages []*tempel.Page) []map[string]string {
+func searchIndex(pages []*templum.Page) []map[string]string {
 	var data []map[string]string
 
 	for _, p := range pages {
-		if p.Type() == tempel.Markdown {
+		if p.Type() == templum.Markdown {
 			md, err := p.Markdown()
 			if err != nil {
 				continue
@@ -65,7 +65,7 @@ func searchIndex(pages []*tempel.Page) []map[string]string {
 			})
 		}
 
-		if p.Type() == tempel.Section {
+		if p.Type() == templum.Section {
 			data = append(data, searchIndex(p.Children())...)
 		}
 	}
@@ -73,11 +73,11 @@ func searchIndex(pages []*tempel.Page) []map[string]string {
 	return data
 }
 
-func toFiles(ctx context.Context, content tempel.Content, pages []*tempel.Page) (map[string]*fstest.MapFile, error) {
+func toFiles(ctx context.Context, content templum.Content, pages []*templum.Page) (map[string]*fstest.MapFile, error) {
 	files := map[string]*fstest.MapFile{}
 
 	for _, p := range pages {
-		if p.Type() == tempel.Markdown {
+		if p.Type() == templum.Markdown {
 			memoryFile, err := toFile(ctx, content, p)
 			if err != nil {
 				return nil, err
@@ -86,7 +86,7 @@ func toFiles(ctx context.Context, content tempel.Content, pages []*tempel.Page) 
 			files[p.Href()] = memoryFile
 		}
 
-		if p.Type() == tempel.Section {
+		if p.Type() == templum.Section {
 			subFiles, err := toFiles(ctx, content, p.Children())
 			if err != nil {
 				return nil, err
@@ -99,7 +99,7 @@ func toFiles(ctx context.Context, content tempel.Content, pages []*tempel.Page) 
 	return files, nil
 }
 
-func toFile(ctx context.Context, content tempel.Content, p *tempel.Page) (*fstest.MapFile, error) {
+func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fstest.MapFile, error) {
 	html, err := p.HTML()
 	if err != nil {
 		return nil, err

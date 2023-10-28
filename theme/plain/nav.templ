@@ -1,8 +1,8 @@
 package plain
 
-import "github.com/cugu/tempel"
+import "github.com/cugu/templum"
 
-templ nav(c *pageContext, config map[string]string, pages []*tempel.Page, depth int) {
+templ nav(c *pageContext, config map[string]string, pages []*templum.Page, depth int) {
     <nav
         class={
             "flex",
@@ -11,7 +11,7 @@ templ nav(c *pageContext, config map[string]string, pages []*tempel.Page, depth 
               templ.KV("pt-2", depth > 0),
         }>
         for _, page := range pages {
-            if page.Type() == tempel.Section {
+            if page.Type() == templum.Section {
                 @section(c, config, page, depth)
             } else {
                 @link(c, config, page, depth)

@@ -1,9 +1,9 @@
 package plain
 
-import "github.com/cugu/tempel"
+import "github.com/cugu/templum"
 import "strings"
 
-templ link(c *pageContext, config map[string]string, page *tempel.Page, depth int) {
+templ link(c *pageContext, config map[string]string, page *templum.Page, depth int) {
     <a
         id={ page.Slug() }
         href={ templ.URL(config["base_url"] + page.Href()) }

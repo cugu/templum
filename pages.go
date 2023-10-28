@@ -1,4 +1,4 @@
-package tempel
+package templum
 
 import (
 	"io/fs"

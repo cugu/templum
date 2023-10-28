@@ -4,9 +4,10 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"github.com/cugu/tempel"
-	"github.com/cugu/tempel/theme/plain"
 	"os"
+
+	"github.com/cugu/templum"
+	"github.com/cugu/templum/theme/plain"
 )
 
 func main() {
@@ -31,7 +32,7 @@ func generateCmd(ctx context.Context, args []string) {
 		os.Exit(1)
 	}
 
-	var theme tempel.Theme
+	var theme templum.Theme
 
 	switch *themeFlag {
 	case "plain":
@@ -41,7 +42,7 @@ func generateCmd(ctx context.Context, args []string) {
 		os.Exit(1)
 	}
 
-	if err := tempel.Generate(ctx, *contentPathFlag, theme, *outputPathFlag); err != nil {
+	if err := templum.Generate(ctx, *contentPathFlag, theme, *outputPathFlag); err != nil {
 		fmt.Println(err.Error()) //nolint:forbidigo
 		os.Exit(1)
 	}

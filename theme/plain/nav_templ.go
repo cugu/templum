@@ -4,50 +4,62 @@ package plain
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 
-import "github.com/a-h/templ"
-import "context"
-import "io"
-import "bytes"
+import (
+	"bytes"
+	"context"
+	"io"
 
-import "github.com/cugu/tempel"
+	"github.com/a-h/templ"
 
-func nav(c *pageContext, config map[string]string, pages []*tempel.Page, depth int) templ.Component {
+	"github.com/cugu/templum"
+)
+
+func nav(c *pageContext, config map[string]string, pages []*templum.Page, depth int) templ.Component {
 	return templ.ComponentFunc(func(templ_7745c5c3_Ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		templ_7745c5c3_Ctx = templ.InitializeContext(templ_7745c5c3_Ctx)
+
 		templ_7745c5c3_Var1 := templ.GetChildren(templ_7745c5c3_Ctx)
 		if templ_7745c5c3_Var1 == nil {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
+
 		templ_7745c5c3_Ctx = templ.ClearChildren(templ_7745c5c3_Ctx)
+
 		var templ_7745c5c3_Var2 = []any{
 			"flex",
 			"flex-col",
 			"space-y-2",
 			templ.KV("pt-2", depth > 0),
 		}
+
 		templ_7745c5c3_Err = templ.RenderCSSItems(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var2).String()))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		for _, page := range pages {
-			if page.Type() == tempel.Section {
+			if page.Type() == templum.Section {
 				templ_7745c5c3_Err = section(c, config, page, depth).Render(templ_7745c5c3_Ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
@@ -59,13 +71,16 @@ func nav(c *pageContext, config map[string]string, pages []*tempel.Page, depth i
 				}
 			}
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }

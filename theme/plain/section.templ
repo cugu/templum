@@ -1,9 +1,9 @@
 package plain
 
-import "github.com/cugu/tempel"
+import "github.com/cugu/templum"
 import "strings"
 
-templ section(c *pageContext, config map[string]string, page *tempel.Page, depth int) {
+templ section(c *pageContext, config map[string]string, page *templum.Page, depth int) {
     <div
         id={ page.Slug() }
         class={

@@ -37,7 +37,7 @@ serve:
 .PHONY: fmt
 fmt:
 	@echo "Formatting..."
-	gci write -s standard -s default -s "prefix(github.com/cugu/tempel)" .
+	gci write -s standard -s default -s "prefix(github.com/cugu/templum)" .
 	gofumpt -l -w .
 	wsl -fix ./...
 

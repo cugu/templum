@@ -1,12 +1,12 @@
-package tempel
+package templum
 
 import (
 	"context"
-	"errors"
-	"gopkg.in/yaml.v3"
 	"io/fs"
 	"os"
 	"testing/fstest"
+
+	"gopkg.in/yaml.v3"
 )
 
 func Generate(ctx context.Context, contentPath string, theme Theme, outputPath string) error {
@@ -64,32 +64,6 @@ func config(fsys fs.FS) (map[string]string, error) {
 	}
 
 	return config, nil
-}
-
-var ErrUnknownTemplate = errors.New("unknown template")
-
-func docFS(ctx context.Context, fsys fs.FS, theme Theme, config map[string]string) (fs.FS, error) {
-	docs, err := fs.Sub(fsys, "docs")
-	if err != nil {
-		return nil, err
-	}
-
-	pages, err := newPages(docs, ".")
-	if err != nil {
-		return nil, err
-	}
-
-	content := Content{
-		Pages:  pages,
-		Config: config,
-	}
-
-	docFS, err := theme.Render(ctx, content)
-	if err != nil {
-		return nil, err
-	}
-
-	return docFS, nil
 }
 
 func staticFS(fsys fs.FS) (fs.FS, error) {
