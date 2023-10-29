@@ -40,10 +40,11 @@ content
 
 ### config.yaml
 
-The config file contains the site base url:
+The config file contains the site base url and the GitHub url:
 
 ```yaml
-base_url: "https://example.com/site/"
+base_url: "https://cugu.github.io/templum/"
+github_url: "https://github.com/cugu/templum"
 ```
 
 ### docs
