@@ -3,7 +3,7 @@ testdata_dir = "testdata"
 tmp_dir = "tmp"
 
 [build]
-  args_bin = ["generate"]
+  args_bin = ["local_generate"]
   bin = "/usr/bin/make"
   cmd = "/usr/bin/true"
   delay = 1000

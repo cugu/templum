@@ -17,7 +17,7 @@ install-dev: install
 	go install github.com/daixiang0/gci@latest
 
 .PHONY: local_generate
-generate:
+local_generate:
 	@echo "Generating..."
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
