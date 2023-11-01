@@ -1,0 +1,32 @@
+package plain
+
+templ menu_toggle() {
+    <div class="menu-toggle md:hidden">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 5C3 4.45 3.45 4 4 4H20C20.55 4 21 4.45 21 5C21 5.55 20.55 6 20 6H4C3.45 6 3 5.55 3 5ZM3 11C3 10.45 3.45 10 4 10H20C20.55 10 21 10.45 21 11C21 11.55 20.55 12 20 12H4C3.45 12 3 11.55 3 11ZM4 16C3.45 16 3 16.45 3 17C3 17.55 3.45 18 4 18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H4Z">
+            </path>
+        </svg>
+    </div>
+}
+
+templ frame(headerContent, asideContent, mainContent, footerContent templ.Component) {
+    <div id="frame" class="flex min-h-screen w-full overflow-x-hidden">
+        <aside id="sidebar" class="fixed w-10/12 md:w-64 flex flex-col h-full md:h-screen z-20 md:overflow-y-scroll">
+            <div class="overflow-y-auto w-full h-full">
+                {! asideContent }
+            </div>
+        </aside>
+        <div class="flex flex-col flex-1 md:ml-64">
+            <div id="overlay" class="fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden"></div>
+            <header class="sticky top-0 w-full flex flex-row">
+                {! headerContent }
+            </header>
+            <main class="flex-1">
+                {! mainContent }
+            </main>
+            <footer>
+                {! footerContent }
+            </footer>
+        </div>
+    </div>
+}
