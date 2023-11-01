@@ -7,7 +7,7 @@ import (
 	"github.com/a-h/templ"
 )
 
-func html(s string) templ.Component {
+func raw(s string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
 		_, err := io.WriteString(w, s)
 

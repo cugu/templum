@@ -21,6 +21,11 @@ module.exports = {
         "./theme/**/*.js",
         "./theme/**/*.templ"
     ],
+    safelist: [
+        {
+            pattern: /bg-+/,
+        },
+    ],
     theme: {
         extend: {
             typography: {

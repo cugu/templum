@@ -1,93 +1,137 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const menu_toggles = document.querySelectorAll('.menu-toggle');
+    menu_toggles.forEach(menu_toggle => {
+        menu_toggle.addEventListener('click', () => {
+            toggleSidebar();
+        });
+    });
+
+    const sidebar_overlay = document.getElementById('sidebar-overlay');
+    if (sidebar_overlay !== null) {
+        sidebar_overlay.addEventListener('click', () => {
+            if (sidebar_overlay.classList.contains('opacity-70')) {
+                toggleSidebar();
+            }
+        });
+    }
+
     const toggles = document.querySelectorAll('.toggle');
-    // Add a click listener to each button
-    toggles.forEach(toggle =>
-        toggle.addEventListener('click', ({target}) => {
-            let navItem = target.parentElement;
-            navItem.classList.toggle('active');
+    if (toggles.length !== 0) {
+        toggles.forEach(toggle =>
+            toggle.addEventListener('click', ({target}) => {
+                let navItem = target.parentElement;
+                navItem.classList.toggle('active');
 
-            let others = document.querySelectorAll('.toggle');
-            others.forEach(other => {
-                if (other !== toggle) {
-                    other.parentElement.classList.remove('active');
-                }
-            });
+                let others = document.querySelectorAll('.toggle');
+                others.forEach(other => {
+                    if (other !== toggle) {
+                        other.parentElement.classList.remove('active');
+                    }
+                });
 
-            // no default action
-            return false;
-        })
-    );
+                // no default action
+                return false;
+            })
+        );
+    }
 
-    var timeout = null;
+    let timeout = null;
 
     const search = document.getElementById('search');
-    search.addEventListener('keyup', ({target}) => {
-        clearTimeout(timeout);
+    if (search !== null) {
+        search.addEventListener('keyup', ({target}) => {
+            clearTimeout(timeout);
 
-        timeout = setTimeout(() => {
-            let value = target.value.toLowerCase();
+            let menu = document.getElementById('sidebar');
+            menu.classList.remove('open');
 
-            if (value === '') {
-                document.getElementById("main").classList.remove('hidden');
-                document.getElementById("search-results").classList.add('hidden');
-                document.getElementById("search-clear").classList.add('hidden');
-                return;
-            }
+            timeout = setTimeout(() => {
+                let value = target.value.toLowerCase();
 
-            let results = [];
-            let excerptWidth = 100;
-
-            for (let i = 0; i < index.length; i++) {
-                let pos = index[i].body.toLowerCase().indexOf(value);
-                if (pos !== -1) {
-                    let excerptPrefix = "";
-                    if (pos - excerptWidth < 0) {
-                        excerptPrefix = index[i].body.substring(0, pos);
-                    } else {
-                        excerptPrefix = "..." + index[i].body.substring(pos - excerptWidth, pos);
-                    }
-
-                    let excerptSuffix = "";
-                    if (pos + excerptWidth > index[i].body.length) {
-                        excerptSuffix = index[i].body.substring(pos, index[i].body.length);
-                    } else {
-                        excerptSuffix = index[i].body.substring(pos + value.length, pos + value.length + excerptWidth) + "...";
-                    }
-
-                    let term = index[i].body.substring(pos, pos + value.length);
-
-                    results.push(searchresult(index[i].title, index[i].href, excerptPrefix, term, excerptSuffix, pos));
+                if (value === '') {
+                    document.getElementById("main").classList.remove('hidden');
+                    document.getElementById("search-results").classList.add('hidden');
+                    document.getElementById("search-clear").classList.add('hidden');
+                    return;
                 }
-            }
 
-            if (results.length === 0) {
-                document.getElementById("search-results-list").innerHTML = '';
-                let noResults = document.createElement('div');
-                noResults.classList.add('py-8', 'font-semibold', 'leading-6', 'text-gray-900');
-                let text = document.createTextNode("No results found for '" + value + "'");
-                noResults.appendChild(text);
+                let results = [];
+                let excerptWidth = 100;
 
-                document.getElementById("search-results-list").appendChild(noResults);
-            } else {
-                document.getElementById("search-results-list").innerHTML = '';
-                results.forEach(result => {
-                    document.getElementById("search-results-list").appendChild(result);
-                });
-            }
-            document.getElementById("main").classList.add('hidden');
-            document.getElementById("search-results").classList.remove('hidden');
-            document.getElementById("search-clear").classList.remove('hidden');
-        }, 400);
-    });
+                for (let i = 0; i < index.length; i++) {
+                    let pos = index[i].body.toLowerCase().indexOf(value);
+                    if (pos !== -1) {
+                        let excerptPrefix = "";
+                        if (pos - excerptWidth < 0) {
+                            excerptPrefix = index[i].body.substring(0, pos);
+                        } else {
+                            excerptPrefix = "..." + index[i].body.substring(pos - excerptWidth, pos);
+                        }
+
+                        let excerptSuffix = "";
+                        if (pos + excerptWidth > index[i].body.length) {
+                            excerptSuffix = index[i].body.substring(pos, index[i].body.length);
+                        } else {
+                            excerptSuffix = index[i].body.substring(pos + value.length, pos + value.length + excerptWidth) + "...";
+                        }
+
+                        let term = index[i].body.substring(pos, pos + value.length);
+
+                        results.push(searchresult(index[i].title, index[i].href, excerptPrefix, term, excerptSuffix, pos));
+                    }
+                }
+
+                if (results.length === 0) {
+                    document.getElementById("search-results-list").innerHTML = '';
+                    let noResults = document.createElement('div');
+                    noResults.classList.add('py-8', 'font-semibold', 'leading-6', 'text-gray-900');
+                    let text = document.createTextNode("No results found for '" + value + "'");
+                    noResults.appendChild(text);
+
+                    document.getElementById("search-results-list").appendChild(noResults);
+                } else {
+                    document.getElementById("search-results-list").innerHTML = '';
+                    results.forEach(result => {
+                        document.getElementById("search-results-list").appendChild(result);
+                    });
+                }
+                document.getElementById("main").classList.add('hidden');
+                document.getElementById("search-results").classList.remove('hidden');
+                document.getElementById("search-clear").classList.remove('hidden');
+            }, 400);
+        });
+    }
+
 
     const searchClear = document.getElementById('search-clear');
-    searchClear.addEventListener('click', () => {
-        document.getElementById("main").classList.remove('hidden');
-        document.getElementById("search-results").classList.add('hidden');
-        document.getElementById("search").value = "";
-        document.getElementById("search-clear").classList.add('hidden');
-    });
+    if (searchClear !== null) {
+        searchClear.addEventListener('click', () => {
+            document.getElementById("main").classList.remove('hidden');
+            document.getElementById("search-results").classList.add('hidden');
+            document.getElementById("search").value = "";
+            document.getElementById("search-clear").classList.add('hidden');
+        });
+    }
 });
+
+function toggleSidebar() {
+    let menu = document.getElementById('sidebar');
+    menu.classList.toggle('open');
+
+    toggleOverlay();
+
+    let body = document.getElementsByTagName('body')[0];
+    body.classList.toggle('overflow-hidden');
+}
+
+function toggleOverlay() {
+    let sidebarOverlay = document.getElementById('overlay');
+    sidebarOverlay.classList.toggle('opacity-0');
+    sidebarOverlay.classList.toggle('opacity-70');
+    setTimeout(() => {
+        sidebarOverlay.classList.toggle('hidden');
+    }, 200);
+}
 
 function searchresult(title, url, excerptPrefix, term, excerptSuffix, pos) {
     let a = document.createElement('a');

@@ -2,8 +2,7 @@
 install:
 	@echo "Installing..."
 	go install github.com/a-h/templ/cmd/templ@latest
-	npm install -g tailwindcss@latest
-	npm install -D tailwindcss@latest @tailwindcss/typography
+	npm install -g tailwindcss@latest @tailwindcss/typography
 
 .PHONY: install-dev
 install-dev: install

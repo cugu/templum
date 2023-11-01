@@ -100,7 +100,7 @@ func toFiles(ctx context.Context, content templum.Content, pages []*templum.Page
 }
 
 func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fstest.MapFile, error) {
-	html, err := p.HTML()
+	mainContent, err := p.HTML()
 	if err != nil {
 		return nil, err
 	}
@@ -110,7 +110,7 @@ func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fst
 	}
 
 	var htmlBuffer bytes.Buffer
-	if err := page(context, content.Config, content.Pages, html).Render(ctx, &htmlBuffer); err != nil {
+	if err := html(context, content.Config, content.Pages, mainContent).Render(ctx, &htmlBuffer); err != nil {
 		return nil, err
 	}
 
