@@ -17,8 +17,9 @@ templ html(c *pageContext, config map[string]string, pages []*templum.Page, cont
             @script(config)
             <script src={ config["base_url"] + "prism.js" }></script>
             <script src={ config["base_url"] + "prism-include-languages.js" }></script>
-            <script src={ config["base_url"] + "search.js" }></script>
             <script src={ config["base_url"] + "main.js" }></script>
+            <script src={ config["base_url"] + "search.js" }></script>
+            <script src={ config["base_url"] + "accordion.js" }></script>
         </body>
     </html>
 }
