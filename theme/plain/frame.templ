@@ -8,6 +8,7 @@ templ html(c *pageContext, config map[string]string, pages []*templum.Page, cont
             <title>{ c.Title }</title>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link href={ config["base_url"] + "favicon.ico" } rel="icon" />
             <link href={ config["base_url"] + "style.css" } rel="stylesheet" />
             <link href={ config["base_url"] + "prism.css" } rel="stylesheet" />
         </head>
