@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const sidebar_overlay = document.getElementById('sidebar-overlay');
-    if (sidebar_overlay !== null) {
-        sidebar_overlay.addEventListener('click', () => {
-            if (sidebar_overlay.classList.contains('opacity-70')) {
+    const overlay = document.getElementById('overlay');
+    if (overlay !== null) {
+        overlay.addEventListener('click', () => {
+            if (overlay.classList.contains('opacity-70')) {
                 toggleSidebar();
             }
         });

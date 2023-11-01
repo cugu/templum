@@ -23,7 +23,7 @@ templ html(c *pageContext, config map[string]string, pages []*templum.Page, cont
 }
 
 templ logo(c *pageContext, config map[string]string) {
-    <a href={ templ.URL(config["base_url"]) }>
+    <a href={ templ.URL(config["base_url"]) } class="ml-2">
         <h1 class="text-2xl font-bold">
             <img src={ config["base_url"] + "logo.svg" } alt="Templum" class="h-12 w-52" />
         </h1>
