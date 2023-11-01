@@ -32,8 +32,9 @@ func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, erro
 	maps.Copy(memoryFS, files)
 
 	memoryFS["style.css"] = &fstest.MapFile{Data: static.CSS}
-	memoryFS["search.js"] = &fstest.MapFile{Data: searchJS(content)}
 	memoryFS["main.js"] = &fstest.MapFile{Data: static.JS}
+	memoryFS["accordion.js"] = &fstest.MapFile{Data: static.AccordionJS}
+	memoryFS["search.js"] = &fstest.MapFile{Data: []byte(string(searchJS(content)) + string(static.SearchJS))}
 	memoryFS["prism.js"] = &fstest.MapFile{Data: static.PrismJS}
 	memoryFS["prism.css"] = &fstest.MapFile{Data: static.PrismCSS}
 	memoryFS["prism-include-languages.js"] = &fstest.MapFile{Data: static.PrismIncludeLanguages}
