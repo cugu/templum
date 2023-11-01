@@ -16,6 +16,13 @@ install-dev: install
 	go install mvdan.cc/gofumpt@latest
 	go install github.com/daixiang0/gci@latest
 
+.PHONY: local_generate
+generate:
+	@echo "Generating..."
+	templ generate
+	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
+	go run ./cmd/templum/. --config local_config.yaml --content content --output public
+
 .PHONY: generate
 generate:
 	@echo "Generating..."

@@ -47,7 +47,7 @@ func frame(headerContent, asideContent, mainContent, footerContent templ.Compone
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"frame\" class=\"flex min-h-screen w-full overflow-x-hidden\"><aside id=\"sidebar\" class=\"fixed w-10/12 md:w-64 flex flex-col h-full md:h-screen z-20 md:overflow-y-scroll\"><div class=\"overflow-y-auto w-full h-full\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"frame\" class=\"flex min-h-screen w-full overflow-x-hidden\"><aside id=\"sidebar\" class=\"fixed w-10/12 md:w-64 flex flex-col h-full md:h-screen\"><div class=\"overflow-y-auto w-full h-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -55,7 +55,7 @@ func frame(headerContent, asideContent, mainContent, footerContent templ.Compone
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></aside><div class=\"flex flex-col flex-1 md:ml-64\"><div id=\"overlay\" class=\"fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden\"></div><header class=\"sticky top-0 w-full flex flex-row\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></aside><div class=\"flex flex-col flex-1 md:ml-64 overflow-x-hidden\"><div id=\"overlay\" class=\"fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden\"></div><header class=\"sticky top-0 w-full flex flex-row\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

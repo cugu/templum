@@ -9,10 +9,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func Generate(ctx context.Context, contentPath string, theme Theme, outputPath string) error {
+func Generate(ctx context.Context, configPath, contentPath string, theme Theme, outputPath string) error {
 	fsys := os.DirFS(contentPath)
 
-	config, err := config(fsys)
+	config, err := config(fsys, configPath)
 	if err != nil {
 		return err
 	}
@@ -50,10 +50,10 @@ func generate(ctx context.Context, content Content, theme Theme, outputPath stri
 	return writeToDisk([]fs.FS{docFS, content.Static}, outputPath)
 }
 
-func config(fsys fs.FS) (map[string]string, error) {
+func config(fsys fs.FS, path string) (map[string]string, error) {
 	var config map[string]string
 
-	f, err := fsys.Open("config.yaml")
+	f, err := fsys.Open(path)
 	if err != nil {
 		return nil, err
 	}
