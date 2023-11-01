@@ -17,6 +17,7 @@ var _ templum.Theme = Theme{}
 type Theme struct{}
 
 type pageContext struct {
+	Title  string
 	Active string
 }
 
@@ -106,6 +107,7 @@ func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fst
 	}
 
 	context := &pageContext{
+		Title:  p.Title(),
 		Active: p.Slug(),
 	}
 
