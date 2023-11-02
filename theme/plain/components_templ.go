@@ -55,7 +55,7 @@ func frame(headerContent, asideContent, mainContent, footerContent templ.Compone
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></aside><div class=\"flex flex-col flex-1 md:ml-64 overflow-x-hidden\"><div id=\"overlay\" class=\"fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden cursor-pointer\"></div><header class=\"sticky top-0 w-full flex flex-row\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></aside><div class=\"flex flex-col flex-1 md:ml-64 overflow-hidden\"><div id=\"overlay\" class=\"fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden cursor-pointer\"></div><header class=\"sticky top-0 w-full flex flex-row\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
