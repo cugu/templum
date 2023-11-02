@@ -10,6 +10,8 @@ github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKs
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/yuin/goldmark v1.6.0 h1:boZcn2GTjpsynOsC0iJHnBWa4Bi0qzfJjthwauItG68=
 github.com/yuin/goldmark v1.6.0/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
+go.abhg.dev/goldmark/anchor v0.1.1 h1:NUH3hAzhfeymRqZKOkSoFReZlEAmfXBZlbXEzpD2Qgc=
+go.abhg.dev/goldmark/anchor v0.1.1/go.mod h1:zYKiaHXTdugwVJRZqInVdmNGQRM3ZRJ6AGBC7xP7its=
 go.abhg.dev/goldmark/mermaid v0.4.0 h1:yqwaYvNFbKwh9JByKzN0eDpxrUoYe8NUJvtSKY94S5M=
 go.abhg.dev/goldmark/mermaid v0.4.0/go.mod h1:L5SiQ7PedPuZY0+zaPoJ5ZnDitIYS0Obi5w7Pf02tPY=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=

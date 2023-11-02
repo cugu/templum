@@ -24,6 +24,7 @@ module.exports = {
         "./content/**/*.md"
     ],
     safelist: [
+        "anchor",
         {
             pattern: /bg-+/,
         },

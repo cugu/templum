@@ -3,6 +3,7 @@ package templum
 import (
 	"bytes"
 	"errors"
+	"github.com/yuin/goldmark/parser"
 	"io/fs"
 	"path"
 	"path/filepath"
@@ -12,6 +13,7 @@ import (
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/renderer/html"
+	"go.abhg.dev/goldmark/anchor"
 	"go.abhg.dev/goldmark/mermaid"
 	"mvdan.cc/xurls/v2"
 )
@@ -132,11 +134,17 @@ func (p *Page) HTML() (string, error) {
 	var htmlBuffer bytes.Buffer
 
 	markdown := goldmark.New(
+		goldmark.WithParserOptions(
+			parser.WithAutoHeadingID(),
+		),
 		goldmark.WithRendererOptions(
 			html.WithXHTML(),
 			html.WithUnsafe(),
 		),
 		goldmark.WithExtensions(
+			&anchor.Extender{
+				Texter: anchor.Text("#"),
+			},
 			extension.NewLinkify(
 				extension.WithLinkifyAllowedProtocols([][]byte{
 					[]byte("http:"),
