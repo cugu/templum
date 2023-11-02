@@ -341,7 +341,7 @@ func main(content string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1></div><div id=\"search-results-list\"></div></section><main id=\"main\" class=\"min-h-full min-w-full p-4 prose\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1></div><div id=\"search-results-list\"></div></section><main id=\"main\" class=\"p-4 prose\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
