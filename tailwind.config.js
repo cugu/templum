@@ -19,7 +19,8 @@ const defaultCss = {
 module.exports = {
     content: [
         "./theme/**/*.js",
-        "./theme/**/*.templ"
+        "./theme/**/*.templ",
+        "./content/**/*.md"
     ],
     safelist: [
         {
