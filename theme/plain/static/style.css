@@ -1021,16 +1021,15 @@ video {
 }
 
 .note {
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  padding: 1rem;
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
@@ -1043,16 +1042,15 @@ video {
 }
 
 .tip {
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(74 222 128 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(240 253 244 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  padding: 1rem;
   --tw-text-opacity: 1;
   color: rgb(22 101 52 / var(--tw-text-opacity));
 }
@@ -1065,16 +1063,15 @@ video {
 }
 
 .info {
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(192 132 252 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(250 245 255 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  padding: 1rem;
   --tw-text-opacity: 1;
   color: rgb(107 33 168 / var(--tw-text-opacity));
 }
@@ -1087,16 +1084,15 @@ video {
 }
 
 .warning {
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(250 204 21 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  padding: 1rem;
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity));
 }
@@ -1109,16 +1105,15 @@ video {
 }
 
 .critical, .caution {
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   border-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(252 165 165 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
-  padding: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  padding: 1rem;
   --tw-text-opacity: 1;
   color: rgb(153 27 27 / var(--tw-text-opacity));
 }

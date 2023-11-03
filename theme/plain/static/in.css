@@ -4,23 +4,23 @@
 
 @layer components {
     .note {
-        @apply text-sm p-2 mb-2 text-gray-800 rounded bg-gray-50 border-2 dark:bg-gray-700 dark:text-gray-400 border-gray-400 border;
+        @apply p-4 my-6 text-gray-800 rounded bg-gray-50 border-2 dark:bg-gray-700 dark:text-gray-400 border-gray-400 border;
     }
 
     .tip {
-        @apply text-sm p-2 mb-2 text-green-800 rounded bg-green-50 border-2 dark:bg-gray-700 dark:text-green-400 border-green-400 border;
+        @apply p-4 my-6 text-green-800 rounded bg-green-50 border-2 dark:bg-gray-700 dark:text-green-400 border-green-400 border;
     }
 
     .info {
-        @apply text-sm p-2 mb-2 text-purple-800 rounded bg-purple-50 border-2 dark:bg-gray-700 dark:text-purple-400 border-purple-400 border;
+        @apply p-4 my-6 text-purple-800 rounded bg-purple-50 border-2 dark:bg-gray-700 dark:text-purple-400 border-purple-400 border;
     }
 
     .warning {
-        @apply text-sm p-2 mb-2 text-yellow-800 rounded bg-yellow-50 border-2 dark:bg-gray-700 dark:text-yellow-400 border-yellow-400 border;
+        @apply p-4 my-6 text-yellow-800 rounded bg-yellow-50 border-2 dark:bg-gray-700 dark:text-yellow-400 border-yellow-400 border;
     }
 
     .critical, .caution {
-        @apply text-sm p-2 mb-2 text-red-800 rounded bg-red-50 border-2 dark:bg-gray-700 dark:text-red-300 border-red-300 border;
+        @apply p-4 my-6 text-red-800 rounded bg-red-50 border-2 dark:bg-gray-700 dark:text-red-300 border-red-300 border;
     }
 
     .note > *, .tip > *, .info > *, .warning > *, .critical > *, .caution > * {
