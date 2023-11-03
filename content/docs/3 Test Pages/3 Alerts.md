@@ -8,22 +8,28 @@ There are five types of alerts:
 - warning
 - caution
 
-<div class="note">
-This is an note alert.
-</div>
+:::{.note}
+markdown inside allowed: `<hr/>`
+:::
 
-<div class="tip">
+:::{.note}
+This is a note alert.
+:::
+
+:::{.tip}
 This is a tip alert.
-</div>
+:::
 
-<div class="info">
+:::{.info}
 This is an info alert.
-</div>
+:::
 
-<div class="warning">
+:::{.warning}
 This is a warning alert.
-</div>
 
-<div class="caution">
+This is a warning alert.
+:::
+
+:::{.caution}
 This is a caution alert.
-</div>
+:::

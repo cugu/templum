@@ -1,6 +1,8 @@
 package static
 
-import _ "embed"
+import (
+	_ "embed"
+)
 
 //go:embed style.css
 var CSS []byte

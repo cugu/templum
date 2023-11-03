@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/stefanfritsch/goldmark-fences"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/renderer/html"
@@ -155,6 +156,7 @@ func (p *Page) HTML() (string, error) {
 				),
 			),
 			&mermaid.Extender{},
+			&fences.Extender{},
 		),
 	)
 
