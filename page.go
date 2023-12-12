@@ -11,7 +11,7 @@ import (
 
 	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
 	"github.com/alecthomas/chroma/v2/styles"
-	"github.com/stefanfritsch/goldmark-fences"
+	fences "github.com/stefanfritsch/goldmark-fences"
 	"github.com/yuin/goldmark"
 	highlighting "github.com/yuin/goldmark-highlighting/v2"
 	"github.com/yuin/goldmark/extension"
@@ -182,7 +182,7 @@ func (p *Page) HTML() (string, string, string, error) {
 	}
 
 	dark := &bytes.Buffer{}
-	if err := formatter.WriteCSS(dark, styles.Get("github-dark")); err != nil {
+	if err := formatter.WriteCSS(dark, styles.Get("nord")); err != nil {
 		return "", "", "", err
 	}
 
