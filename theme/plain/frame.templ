@@ -2,7 +2,7 @@ package plain
 
 import "github.com/cugu/templum"
 
-templ html(c *pageContext, config map[string]string, pages []*templum.Page, content string) {
+templ html(c *pageContext, config map[string]string, pages []*templum.Page, content, light, dark string) {
     <html>
         <head>
             <title>{ c.Title }</title>
@@ -10,16 +10,14 @@ templ html(c *pageContext, config map[string]string, pages []*templum.Page, cont
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link href={ config["base_url"] + "favicon.ico" } rel="icon" />
             <link href={ config["base_url"] + "style.css" } rel="stylesheet" />
-            <link href={ config["base_url"] + "prism.css" } rel="stylesheet" />
         </head>
         <body class="bg-white dark:bg-gray-800 dark:text-gray-100">
             @frame(header(c, config), sidebar(c, config, pages), main(content), footer(c, config))
             @script(config)
-            <script src={ config["base_url"] + "prism.js" }></script>
-            <script src={ config["base_url"] + "prism-include-languages.js" }></script>
             <script src={ config["base_url"] + "main.js" }></script>
             <script src={ config["base_url"] + "search.js" }></script>
             <script src={ config["base_url"] + "accordion.js" }></script>
+            @style(light, dark)
         </body>
     </html>
 }

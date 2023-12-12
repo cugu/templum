@@ -2,6 +2,7 @@ package templum
 
 import (
 	"context"
+	"fmt"
 	"io/fs"
 	"os"
 	"testing/fstest"
@@ -14,22 +15,22 @@ func Generate(ctx context.Context, configPath, contentPath string, theme Theme, 
 
 	config, err := config(fsys, configPath)
 	if err != nil {
-		return err
+		return fmt.Errorf("error reading config: %w", err)
 	}
 
 	docs, err := fs.Sub(fsys, "docs")
 	if err != nil {
-		return err
+		return fmt.Errorf("error reading docs: %w", err)
 	}
 
 	pages, err := newPages(docs, ".")
 	if err != nil {
-		return err
+		return fmt.Errorf("error reading docs: %w", err)
 	}
 
 	staticFS, err := staticFS(fsys)
 	if err != nil {
-		return err
+		return fmt.Errorf("error reading static: %w", err)
 	}
 
 	content := Content{
@@ -38,7 +39,11 @@ func Generate(ctx context.Context, configPath, contentPath string, theme Theme, 
 		Config: config,
 	}
 
-	return generate(ctx, content, theme, outputPath)
+	if err := generate(ctx, content, theme, outputPath); err != nil {
+		return fmt.Errorf("error generating: %w", err)
+	}
+
+	return nil
 }
 
 func generate(ctx context.Context, content Content, theme Theme, outputPath string) error {
