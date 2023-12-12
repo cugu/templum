@@ -182,7 +182,7 @@ func (p *Page) HTML() (string, string, string, error) {
 	}
 
 	dark := &bytes.Buffer{}
-	if err := formatter.WriteCSS(dark, styles.Get("github-dark")); err != nil {
+	if err := formatter.WriteCSS(dark, styles.Get("nord")); err != nil {
 		return "", "", "", err
 	}
 

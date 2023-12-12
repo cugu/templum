@@ -69,3 +69,7 @@
 .active > div > .chevron {
     transform: rotate(0deg);
 }
+
+pre.chroma {
+    @apply p-4 my-6 rounded  border-2 dark:text-gray-400 border-gray-400 border overflow-x-auto;
+}
