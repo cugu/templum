@@ -3,7 +3,6 @@ package templum
 import (
 	"bytes"
 	"errors"
-	"github.com/alecthomas/chroma/v2/styles"
 	"io/fs"
 	"path"
 	"path/filepath"
@@ -11,6 +10,7 @@ import (
 	"strings"
 
 	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
+	"github.com/alecthomas/chroma/v2/styles"
 	"github.com/stefanfritsch/goldmark-fences"
 	"github.com/yuin/goldmark"
 	highlighting "github.com/yuin/goldmark-highlighting/v2"
