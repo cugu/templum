@@ -3,16 +3,19 @@ package templum
 import (
 	"bytes"
 	"errors"
-	"github.com/yuin/goldmark/parser"
 	"io/fs"
 	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
 
+	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
+	"github.com/alecthomas/chroma/v2/styles"
 	"github.com/stefanfritsch/goldmark-fences"
 	"github.com/yuin/goldmark"
+	highlighting "github.com/yuin/goldmark-highlighting/v2"
 	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/parser"
 	"github.com/yuin/goldmark/renderer/html"
 	"go.abhg.dev/goldmark/anchor"
 	"go.abhg.dev/goldmark/mermaid"
@@ -126,10 +129,10 @@ func (p *Page) Markdown() (string, error) {
 	return string(b), nil
 }
 
-func (p *Page) HTML() (string, error) {
+func (p *Page) HTML() (string, string, string, error) {
 	b, err := p.Markdown()
 	if err != nil {
-		return "", err
+		return "", "", "", err
 	}
 
 	var htmlBuffer bytes.Buffer
@@ -157,14 +160,33 @@ func (p *Page) HTML() (string, error) {
 			),
 			&mermaid.Extender{},
 			&fences.Extender{},
+			highlighting.NewHighlighting(
+				highlighting.WithStyle("vs"),
+				highlighting.WithFormatOptions(
+					chromahtml.WithLineNumbers(true),
+					chromahtml.WithClasses(true),
+				),
+			),
 		),
 	)
 
 	if err := markdown.Convert([]byte(b), &htmlBuffer); err != nil {
-		return "", err
+		return "", "", "", err
 	}
 
-	return htmlBuffer.String(), nil
+	formatter := chromahtml.New()
+
+	light := &bytes.Buffer{}
+	if err := formatter.WriteCSS(light, styles.Get("vs")); err != nil {
+		return "", "", "", err
+	}
+
+	dark := &bytes.Buffer{}
+	if err := formatter.WriteCSS(dark, styles.Get("github-dark")); err != nil {
+		return "", "", "", err
+	}
+
+	return htmlBuffer.String(), light.String(), dark.String(), nil
 }
 
 func (p *Page) AddChildren(child ...*Page) {

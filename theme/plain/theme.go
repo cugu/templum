@@ -35,9 +35,6 @@ func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, erro
 	memoryFS["main.js"] = &fstest.MapFile{Data: static.JS}
 	memoryFS["accordion.js"] = &fstest.MapFile{Data: static.AccordionJS}
 	memoryFS["search.js"] = &fstest.MapFile{Data: []byte(string(searchJS(content)) + string(static.SearchJS))}
-	memoryFS["prism.js"] = &fstest.MapFile{Data: static.PrismJS}
-	memoryFS["prism.css"] = &fstest.MapFile{Data: static.PrismCSS}
-	memoryFS["prism-include-languages.js"] = &fstest.MapFile{Data: static.PrismIncludeLanguages}
 
 	return memoryFS, nil
 }
@@ -102,7 +99,7 @@ func toFiles(ctx context.Context, content templum.Content, pages []*templum.Page
 }
 
 func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fstest.MapFile, error) {
-	mainContent, err := p.HTML()
+	mainContent, light, dark, err := p.HTML()
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +110,7 @@ func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fst
 	}
 
 	var htmlBuffer bytes.Buffer
-	if err := html(context, content.Config, content.Pages, mainContent).Render(ctx, &htmlBuffer); err != nil {
+	if err := html(context, content.Config, content.Pages, mainContent, light, dark).Render(ctx, &htmlBuffer); err != nil {
 		return nil, err
 	}
 

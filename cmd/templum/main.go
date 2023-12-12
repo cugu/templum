@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/cugu/templum"
@@ -15,6 +16,8 @@ func main() {
 }
 
 func generateCmd(ctx context.Context, args []string) {
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
+
 	cmd := flag.NewFlagSet("generate", flag.ExitOnError)
 	contentPathFlag := cmd.String("content", ".", "filesystem path to content directory (default: '.')")
 	outputPathFlag := cmd.String("output", "public", "filesystem path to output directory (default: 'public')")
