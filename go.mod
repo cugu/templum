@@ -3,7 +3,7 @@ module github.com/cugu/templum
 go 1.21.1
 
 require (
-	github.com/a-h/templ v0.2.476
+	github.com/a-h/templ v0.2.501
 	github.com/alecthomas/chroma/v2 v2.12.0
 	github.com/stefanfritsch/goldmark-fences v1.0.0
 	github.com/yuin/goldmark v1.6.0
