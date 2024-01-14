@@ -240,7 +240,7 @@ func logo(c *templum.PageContext) templ.Component {
 			return templ_7745c5c3_Err
 		}
 
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><h1 class=\"text-2xl font-bold\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><div class=\"flex flex-row flex-1 my-1.5\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -256,7 +256,7 @@ func logo(c *templum.PageContext) templ.Component {
 				return templ_7745c5c3_Err
 			}
 
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"logo\" class=\"h-12 w-52\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"logo\" class=\"h-8 mr-2\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -286,7 +286,7 @@ func logo(c *templum.PageContext) templ.Component {
 			}
 		}
 
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1></a>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></a>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

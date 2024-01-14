@@ -44,16 +44,16 @@ templ frame(headerContent, asideContent, mainContent, footerContent templ.Compon
 
 templ logo(c *templum.PageContext) {
 	<a href={ templ.URL(c.BaseURL) }>
-		<h1 class="text-2xl font-bold">
+		<div class="flex flex-row flex-1 my-1.5">
 		    if logo, ok := c.Config["logo"]; ok {
-                <img src={ c.BaseURL + logo } alt="logo" class="h-12 w-52"/>
+                <img src={ c.BaseURL + logo } alt="logo" class="h-8 mr-2"/>
             }
             if title, ok := c.Config["title"]; ok {
                 <h1 class="text-2xl font-bold">
                     { title }
                 </h1>
             }
-		</h1>
+		</div>
 	</a>
 }
 
