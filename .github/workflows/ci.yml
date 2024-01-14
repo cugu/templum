@@ -27,7 +27,7 @@ jobs:
 
       - name: Fmt
         run: |
-          make install_tools
+          make install-dev
           make fmt
 
   test:
