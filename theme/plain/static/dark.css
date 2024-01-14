@@ -1,0 +1,60 @@
+/* LineHighlight */ html.dark .chroma .hl { background-color: #424853 }
+/* LineNumbersTable */ html.dark .chroma .lnt { white-space: pre; -webkit-user-select: none; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #6c6f74 }
+/* LineNumbers */ html.dark .chroma .ln { white-space: pre; -webkit-user-select: none; user-select: none; margin-right: 0.4em; padding: 0 0.4em 0 0.4em;color: #6c6f74 }
+/* Keyword */ html.dark .chroma .k { color: #81a1c1; font-weight: bold }
+/* KeywordConstant */ html.dark .chroma .kc { color: #81a1c1; font-weight: bold }
+/* KeywordDeclaration */ html.dark .chroma .kd { color: #81a1c1; font-weight: bold }
+/* KeywordNamespace */ html.dark .chroma .kn { color: #81a1c1; font-weight: bold }
+/* KeywordPseudo */ html.dark .chroma .kp { color: #81a1c1 }
+/* KeywordReserved */ html.dark .chroma .kr { color: #81a1c1; font-weight: bold }
+/* KeywordType */ html.dark .chroma .kt { color: #81a1c1 }
+/* NameAttribute */ html.dark .chroma .na { color: #8fbcbb }
+/* NameBuiltin */ html.dark .chroma .nb { color: #81a1c1 }
+/* NameClass */ html.dark .chroma .nc { color: #8fbcbb }
+/* NameConstant */ html.dark .chroma .no { color: #8fbcbb }
+/* NameDecorator */ html.dark .chroma .nd { color: #d08770 }
+/* NameEntity */ html.dark .chroma .ni { color: #d08770 }
+/* NameException */ html.dark .chroma .ne { color: #bf616a }
+/* NameFunction */ html.dark .chroma .nf { color: #88c0d0 }
+/* NameLabel */ html.dark .chroma .nl { color: #8fbcbb }
+/* NameNamespace */ html.dark .chroma .nn { color: #8fbcbb }
+/* NameProperty */ html.dark .chroma .py { color: #8fbcbb }
+/* NameTag */ html.dark .chroma .nt { color: #81a1c1 }
+/* LiteralString */ html.dark .chroma .s { color: #a3be8c }
+/* LiteralStringAffix */ html.dark .chroma .sa { color: #a3be8c }
+/* LiteralStringBacktick */ html.dark .chroma .sb { color: #a3be8c }
+/* LiteralStringChar */ html.dark .chroma .sc { color: #a3be8c }
+/* LiteralStringDelimiter */ html.dark .chroma .dl { color: #a3be8c }
+/* LiteralStringDoc */ html.dark .chroma .sd { color: #616e87 }
+/* LiteralStringDouble */ html.dark .chroma .s2 { color: #a3be8c }
+/* LiteralStringEscape */ html.dark .chroma .se { color: #ebcb8b }
+/* LiteralStringHeredoc */ html.dark .chroma .sh { color: #a3be8c }
+/* LiteralStringInterpol */ html.dark .chroma .si { color: #a3be8c }
+/* LiteralStringOther */ html.dark .chroma .sx { color: #a3be8c }
+/* LiteralStringRegex */ html.dark .chroma .sr { color: #ebcb8b }
+/* LiteralStringSingle */ html.dark .chroma .s1 { color: #a3be8c }
+/* LiteralStringSymbol */ html.dark .chroma .ss { color: #a3be8c }
+/* LiteralNumber */ html.dark .chroma .m { color: #b48ead }
+/* LiteralNumberBin */ html.dark .chroma .mb { color: #b48ead }
+/* LiteralNumberFloat */ html.dark .chroma .mf { color: #b48ead }
+/* LiteralNumberHex */ html.dark .chroma .mh { color: #b48ead }
+/* LiteralNumberInteger */ html.dark .chroma .mi { color: #b48ead }
+/* LiteralNumberIntegerLong */ html.dark .chroma .il { color: #b48ead }
+/* LiteralNumberOct */ html.dark .chroma .mo { color: #b48ead }
+/* Operator */ html.dark .chroma .o { color: #81a1c1 }
+/* OperatorWord */ html.dark .chroma .ow { color: #81a1c1; font-weight: bold }
+/* Punctuation */ html.dark .chroma .p { color: #eceff4 }
+/* Comment */ html.dark .chroma .c { color: #616e87; font-style: italic }
+/* CommentHashbang */ html.dark .chroma .ch { color: #616e87; font-style: italic }
+/* CommentMultiline */ html.dark .chroma .cm { color: #616e87; font-style: italic }
+/* CommentSingle */ html.dark .chroma .c1 { color: #616e87; font-style: italic }
+/* CommentSpecial */ html.dark .chroma .cs { color: #616e87; font-style: italic }
+/* CommentPreproc */ html.dark .chroma .cp { color: #5e81ac; font-style: italic }
+/* CommentPreprocFile */ html.dark .chroma .cpf { color: #5e81ac; font-style: italic }
+/* GenericDeleted */ html.dark .chroma .gd { color: #bf616a }
+/* GenericError */ html.dark .chroma .gr { color: #bf616a }
+/* GenericHeading */ html.dark .chroma .gh { color: #88c0d0; font-weight: bold }
+/* GenericInserted */ html.dark .chroma .gi { color: #a3be8c }
+/* GenericPrompt */ html.dark .chroma .gp { color: #4c566a; font-weight: bold }
+/* GenericSubheading */ html.dark .chroma .gu { color: #88c0d0; font-weight: bold }
+/* GenericTraceback */ html.dark .chroma .gt { color: #bf616a }

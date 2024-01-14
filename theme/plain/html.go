@@ -24,20 +24,3 @@ func script(c *pageContext) templ.Component {
 		return err
 	})
 }
-
-func style(light, dark string) templ.Component {
-	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
-		s := "<style>"
-		s += "html.dark {"
-		s += dark
-		s += "}"
-		s += "html:not(.dark) {"
-		s += light
-		s += "}"
-		s += "</style>"
-
-		_, err := io.WriteString(w, s)
-
-		return err
-	})
-}
