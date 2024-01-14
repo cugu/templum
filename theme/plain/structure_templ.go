@@ -498,7 +498,7 @@ func footer(c *templum.PageContext) templ.Component {
 
 		ctx = templ.ClearChildren(ctx)
 
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-between p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 border-t-2 dark:border-gray-600\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"md:hidden flex justify-between p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 border-t-2 dark:border-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
