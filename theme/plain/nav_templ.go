@@ -5,122 +5,103 @@ package plain
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 
-import (
-	"bytes"
-	"context"
-	"io"
-	"strings"
+import "github.com/a-h/templ"
+import "context"
+import "io"
+import "bytes"
 
-	"github.com/a-h/templ"
+import (
+	"strings"
 
 	"github.com/cugu/templum"
 )
 
-func nav(c *pageContext, pages []*templum.Page, depth int) templ.Component {
+func nav(c *templum.PageContext, menuItems []*templum.Page, depth int) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
-
 		ctx = templ.InitializeContext(ctx)
-
 		templ_7745c5c3_Var1 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var1 == nil {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
-
 		ctx = templ.ClearChildren(ctx)
-
 		var templ_7745c5c3_Var2 = []any{
 			"flex",
 			"flex-col",
 			"space-y-2",
 			templ.KV("pt-2", depth > 0),
 		}
-
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<nav class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var2).String()))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
-		for _, page := range pages {
-			if page.Type() == templum.Section {
-				templ_7745c5c3_Err = section(c, page, depth).Render(ctx, templ_7745c5c3_Buffer)
+		for _, menuItem := range menuItems {
+			if menuItem.Type() == templum.Section {
+				templ_7745c5c3_Err = section(c, menuItem, depth).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			} else {
-				templ_7745c5c3_Err = link(c, page, depth).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = link(c, menuItem).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
-
 		return templ_7745c5c3_Err
 	})
 }
 
-func section(c *pageContext, page *templum.Page, depth int) templ.Component {
+func section(c *templum.PageContext, menuItem *templum.Page, depth int) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
-
 		ctx = templ.InitializeContext(ctx)
-
 		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var3 == nil {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
-
 		ctx = templ.ClearChildren(ctx)
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<details")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
-		if strings.HasPrefix(c.Page.Link(), page.Link()) {
+		if strings.HasPrefix(c.Page.Link(), menuItem.Link()) {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" open")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		var templ_7745c5c3_Var4 = []any{
 			"flex",
 			"justify-between",
@@ -132,104 +113,84 @@ func section(c *pageContext, page *templum.Page, depth int) templ.Component {
 			"w-full",
 			"hover:bg-gray-200",
 			"dark:hover:bg-gray-700",
-			templ.KV("active", strings.HasPrefix(c.Page.Link(), page.Link())),
-			templ.KV("font-bold", strings.HasPrefix(c.Page.Link(), page.Link())),
+			templ.KV("active", strings.HasPrefix(c.Page.Link(), menuItem.Link())),
+			templ.KV("font-bold", strings.HasPrefix(c.Page.Link(), menuItem.Link())),
 		}
-
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<summary class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var4).String()))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		var templ_7745c5c3_Var5 string
-
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(page.Title())
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(menuItem.Title())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/nav.templ`, Line: 47, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/nav.templ`, Line: 47, Col: 21}
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"chevron\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		templ_7745c5c3_Err = chevron().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></summary> ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
-		if len(page.Children()) > 0 {
+		if len(menuItem.Children()) > 0 {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"wrapper\"><div class=\"pl-1 inner\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-
-			templ_7745c5c3_Err = nav(c, page.Children(), depth+1).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = nav(c, menuItem.Children(), depth+1).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</details>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
-
 		return templ_7745c5c3_Err
 	})
 }
 
-func link(c *pageContext, page *templum.Page, depth int) templ.Component {
+func link(c *templum.PageContext, menuItem *templum.Page) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
-
 		ctx = templ.InitializeContext(ctx)
-
 		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var6 == nil {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
-
 		ctx = templ.ClearChildren(ctx)
-
 		var templ_7745c5c3_Var7 = []any{
 			"block",
 			"p-2",
@@ -237,65 +198,52 @@ func link(c *pageContext, page *templum.Page, depth int) templ.Component {
 			"w-full",
 			"hover:bg-gray-200",
 			"dark:hover:bg-gray-700",
-			templ.KV("font-bold", c.Page.Link() == page.Link()),
-			templ.KV("font-normal", c.Page.Link() != page.Link()),
-			templ.KV("bg-gray-200", c.Page.Link() == page.Link()),
-			templ.KV("dark:bg-gray-700", c.Page.Link() == page.Link()),
+			templ.KV("font-bold", c.Page.Link() == menuItem.Link()),
+			templ.KV("font-normal", c.Page.Link() != menuItem.Link()),
+			templ.KV("bg-gray-200", c.Page.Link() == menuItem.Link()),
+			templ.KV("dark:bg-gray-700", c.Page.Link() == menuItem.Link()),
 		}
-
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var7...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
-		var templ_7745c5c3_Var8 templ.SafeURL = templ.URL(c.BaseURL + page.Link())
-
+		var templ_7745c5c3_Var8 templ.SafeURL = templ.URL(c.BaseURL + menuItem.Link())
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var8)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var7).String()))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		var templ_7745c5c3_Var9 string
-
-		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(page.Title())
+		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(menuItem.Title())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/nav.templ`, Line: 78, Col: 16}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/nav.templ`, Line: 78, Col: 20}
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
-
 		return templ_7745c5c3_Err
 	})
 }

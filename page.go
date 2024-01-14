@@ -21,6 +21,13 @@ import (
 	"mvdan.cc/xurls/v2"
 )
 
+type PageType int
+
+const (
+	Section PageType = iota
+	Markdown
+)
+
 type Page struct {
 	fsys     fs.FS
 	path     string

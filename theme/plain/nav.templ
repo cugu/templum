@@ -6,7 +6,7 @@ import (
 	"github.com/cugu/templum"
 )
 
-templ nav(c *pageContext, pages []*templum.Page, depth int) {
+templ nav(c *templum.PageContext, menuItems []*templum.Page, depth int) {
 	<nav
 		class={
 			"flex",
@@ -15,19 +15,19 @@ templ nav(c *pageContext, pages []*templum.Page, depth int) {
 			templ.KV("pt-2", depth > 0),
 		}
 	>
-		for _, page := range pages {
-			if page.Type() == templum.Section {
-				@section(c, page, depth)
+		for _, menuItem := range menuItems {
+			if menuItem.Type() == templum.Section {
+				@section(c, menuItem, depth)
 			} else {
-				@link(c, page, depth)
+				@link(c, menuItem)
 			}
 		}
 	</nav>
 }
 
-templ section(c *pageContext, page *templum.Page, depth int) {
+templ section(c *templum.PageContext, menuItem *templum.Page, depth int) {
 	<details
-		open?={ strings.HasPrefix(c.Page.Link(), page.Link()) }
+		open?={ strings.HasPrefix(c.Page.Link(), menuItem.Link()) }
 	>
 		<summary
 			class={
@@ -41,28 +41,28 @@ templ section(c *pageContext, page *templum.Page, depth int) {
 				"w-full",
 				"hover:bg-gray-200",
 				"dark:hover:bg-gray-700",
-				templ.KV("active", strings.HasPrefix(c.Page.Link(), page.Link())),
-				templ.KV("font-bold", strings.HasPrefix(c.Page.Link(), page.Link())),
+				templ.KV("active", strings.HasPrefix(c.Page.Link(), menuItem.Link())),
+				templ.KV("font-bold", strings.HasPrefix(c.Page.Link(), menuItem.Link())),
 			}
 		>
-			{ page.Title() }
+			{ menuItem.Title() }
 			<div class="chevron">
 				@chevron()
 			</div>
 		</summary>
-		if len(page.Children()) > 0 {
+		if len(menuItem.Children()) > 0 {
 			<div class="wrapper">
 				<div class="pl-1 inner">
-					@nav(c, page.Children(), depth + 1)
+					@nav(c, menuItem.Children(), depth + 1)
 				</div>
 			</div>
 		}
 	</details>
 }
 
-templ link(c *pageContext, page *templum.Page, depth int) {
+templ link(c *templum.PageContext, menuItem *templum.Page) {
 	<a
-		href={ templ.URL(c.BaseURL + page.Link()) }
+		href={ templ.URL(c.BaseURL + menuItem.Link()) }
 		class={
 			"block",
 			"p-2",
@@ -70,12 +70,12 @@ templ link(c *pageContext, page *templum.Page, depth int) {
 			"w-full",
 			"hover:bg-gray-200",
 			"dark:hover:bg-gray-700",
-			templ.KV("font-bold", c.Page.Link() == page.Link()),
-			templ.KV("font-normal", c.Page.Link() != page.Link()),
-			templ.KV("bg-gray-200", c.Page.Link() == page.Link()),
-			templ.KV("dark:bg-gray-700", c.Page.Link() == page.Link()),
+			templ.KV("font-bold", c.Page.Link() == menuItem.Link()),
+			templ.KV("font-normal", c.Page.Link() != menuItem.Link()),
+			templ.KV("bg-gray-200", c.Page.Link() == menuItem.Link()),
+			templ.KV("dark:bg-gray-700", c.Page.Link() == menuItem.Link()),
 		}
 	>
-		{ page.Title() }
+		{ menuItem.Title() }
 	</a>
 }

@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"io/fs"
 	"maps"
-	"testing/fstest"
 
 	"github.com/cugu/templum"
 	"github.com/cugu/templum/theme/plain/static"
@@ -16,33 +15,67 @@ var _ templum.Theme = Theme{}
 
 type Theme struct{}
 
-type pageContext struct {
-	BaseURL string
-	Page    *templum.Page
-	Config  map[string]string
-}
+func (t Theme) Render(ctx context.Context, context *templum.SiteContext) (fs.FS, error) {
+	memoryFS := templum.MemoryFS{}
 
-func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, error) {
-	memoryFS := fstest.MapFS{}
-
-	files, err := toFiles(ctx, content, content.Pages)
+	files, err := toFiles(ctx, context, context.Pages)
 	if err != nil {
 		return nil, err
 	}
 
 	maps.Copy(memoryFS, files)
 
-	memoryFS["style.css"] = &fstest.MapFile{Data: static.CSS}
-	memoryFS["main.js"] = &fstest.MapFile{Data: static.JS}
-	memoryFS["search.js"] = &fstest.MapFile{Data: []byte(string(searchJS(content)) + string(static.SearchJS))}
+	memoryFS["style.css"] = &templum.MemoryFile{Data: static.CSS}
+	memoryFS["main.js"] = &templum.MemoryFile{Data: static.JS}
+	memoryFS["search.js"] = &templum.MemoryFile{Data: []byte(string(searchJS(context.Pages)) + string(static.SearchJS))}
 
 	return memoryFS, nil
 }
 
-func searchJS(content templum.Content) []byte {
-	data := searchIndex(content.Pages)
+func toFiles(ctx context.Context, context *templum.SiteContext, pages []*templum.Page) (map[string]*templum.MemoryFile, error) {
+	files := map[string]*templum.MemoryFile{}
 
-	b, _ := json.Marshal(data)
+	for _, p := range pages {
+		if p.Type() == templum.Markdown {
+			memoryFile, err := toFile(ctx, context, p)
+			if err != nil {
+				return nil, err
+			}
+
+			files[p.Link()] = memoryFile
+		}
+
+		if p.Type() == templum.Section {
+			subFiles, err := toFiles(ctx, context, p.Children())
+			if err != nil {
+				return nil, err
+			}
+
+			maps.Copy(files, subFiles)
+		}
+	}
+
+	return files, nil
+}
+
+func toFile(ctx context.Context, context *templum.SiteContext, p *templum.Page) (*templum.MemoryFile, error) {
+	mainContent, err := p.HTML()
+	if err != nil {
+		return nil, err
+	}
+
+	mainComponent := html(&templum.PageContext{SiteContext: context, Page: p}, mainContent)
+
+	var htmlBuffer bytes.Buffer
+	if err := mainComponent.Render(ctx, &htmlBuffer); err != nil {
+		return nil, err
+	}
+
+	return &templum.MemoryFile{Data: htmlBuffer.Bytes()}, nil
+}
+
+func searchJS(pages []*templum.Page) []byte {
+	b, _ := json.Marshal(searchIndex(pages))
 
 	return []byte("var index = " + string(b) + ";")
 }
@@ -70,50 +103,4 @@ func searchIndex(pages []*templum.Page) []map[string]string {
 	}
 
 	return data
-}
-
-func toFiles(ctx context.Context, content templum.Content, pages []*templum.Page) (map[string]*fstest.MapFile, error) {
-	files := map[string]*fstest.MapFile{}
-
-	for _, p := range pages {
-		if p.Type() == templum.Markdown {
-			memoryFile, err := toFile(ctx, content, p)
-			if err != nil {
-				return nil, err
-			}
-
-			files[p.Link()] = memoryFile
-		}
-
-		if p.Type() == templum.Section {
-			subFiles, err := toFiles(ctx, content, p.Children())
-			if err != nil {
-				return nil, err
-			}
-
-			maps.Copy(files, subFiles)
-		}
-	}
-
-	return files, nil
-}
-
-func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fstest.MapFile, error) {
-	mainContent, err := p.HTML()
-	if err != nil {
-		return nil, err
-	}
-
-	context := &pageContext{
-		BaseURL: content.BaseURL,
-		Page:    p,
-		Config:  content.Config,
-	}
-
-	var htmlBuffer bytes.Buffer
-	if err := html(context, content.Pages, mainContent).Render(ctx, &htmlBuffer); err != nil {
-		return nil, err
-	}
-
-	return &fstest.MapFile{Data: htmlBuffer.Bytes()}, nil
 }

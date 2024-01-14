@@ -2,14 +2,11 @@
 install:
 	@echo "Installing..."
 	go install github.com/a-h/templ/cmd/templ@latest
-	npm install -g tailwindcss@latest @tailwindcss/typography
+	npm install tailwindcss@latest @tailwindcss/typography
 
 .PHONY: install-dev
 install-dev: install
 	@echo "Installing..."
-	npm install -g postcss@latest autoprefixer@latest
-	npm install -D postcss@latest autoprefixer@latest
-	npm install -g live-server@latest
 	npm install -D live-server@latest
 	go install github.com/bombsimon/wsl/v4/cmd...@master
 	go install mvdan.cc/gofumpt@latest
@@ -20,7 +17,7 @@ local_generate:
 	@echo "Generating..."
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
-	go run ./cmd/templum/. --content content --output public --config config.yaml --url "http://localhost:8080/"
+	go run ./cmd/templum/. --content content --output public --url "http://localhost:8080/"
 
 .PHONY: serve
 serve:
