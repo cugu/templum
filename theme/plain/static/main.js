@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.documentElement.classList.remove('no-js');
+
     const menu_toggles = document.querySelectorAll('.menu-toggle');
     menu_toggles.forEach(menu_toggle => {
         menu_toggle.addEventListener('click', () => {

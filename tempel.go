@@ -6,9 +6,9 @@ import (
 )
 
 type Content struct {
-	Config map[string]string
-	Static fs.FS
-	Pages  []*Page
+	BaseURL string
+	Config  map[string]string
+	Pages   []*Page
 }
 
 type Theme interface {

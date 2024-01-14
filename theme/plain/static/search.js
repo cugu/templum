@@ -82,22 +82,22 @@ function searchresult(title, url, excerptPrefix, term, excerptSuffix, pos) {
     a.setAttribute('href', base_url + url);
 
     let div = document.createElement('div');
-    div.classList.add('flex', 'flex-col', 'gap-x-6', 'mt-2', 'p-5', 'bg-gray-100', 'rounded', 'hover:bg-gray-200');
+    div.classList.add('flex', 'flex-col', 'gap-x-6', 'mt-2', 'p-4', 'hover:bg-gray-100', 'dark:bg-gray-700', 'dark:hover:bg-gray-600', 'rounded-lg', 'border', 'border-gray-200', 'dark:border-gray-600');
 
     let titleDiv = document.createElement('div');
     titleDiv.classList.add('min-w-0', 'flex-auto');
 
     let titleP = document.createElement('p');
-    titleP.classList.add('text-sm', 'font-semibold', 'leading-6', 'text-gray-900');
+    titleP.classList.add('text', 'font-semibold', 'leading-6', 'text-gray-900', 'dark:text-gray-100');
 
     let excerptP = document.createElement('p');
-    excerptP.classList.add('mt-1', 'text-xs', 'leading-5', 'text-gray-500');
+    excerptP.classList.add('mt-1', 'text-sm', 'leading-5', 'text-gray-500', 'dark:text-gray-400');
 
     let urlDiv = document.createElement('div');
     urlDiv.classList.add('shrink-0', 'sm:flex', 'sm:flex-col', 'sm:items-end');
 
     let urlP = document.createElement('p');
-    urlP.classList.add('mt-1', 'text-xs', 'leading-5', 'text-gray-500');
+    urlP.classList.add('mt-1', 'text-sm', 'leading-5', 'text-gray-500', 'dark:text-gray-400');
 
     let text = document.createTextNode(title);
     titleP.appendChild(text);

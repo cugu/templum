@@ -10,7 +10,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func Generate(ctx context.Context, configPath, contentPath string, theme Theme, outputPath string) error {
+func Generate(ctx context.Context, baseURL, configPath, contentPath string, theme Theme, outputPath string) error {
 	fsys := os.DirFS(contentPath)
 
 	config, err := config(fsys, configPath)
@@ -23,7 +23,7 @@ func Generate(ctx context.Context, configPath, contentPath string, theme Theme, 
 		return fmt.Errorf("error reading docs: %w", err)
 	}
 
-	pages, err := newPages(docs, ".")
+	pages, otherFiles, err := newPages(docs, ".")
 	if err != nil {
 		return fmt.Errorf("error reading docs: %w", err)
 	}
@@ -34,25 +34,25 @@ func Generate(ctx context.Context, configPath, contentPath string, theme Theme, 
 	}
 
 	content := Content{
-		Pages:  pages,
-		Static: staticFS,
-		Config: config,
+		BaseURL: baseURL,
+		Pages:   pages,
+		Config:  config,
 	}
 
-	if err := generate(ctx, content, theme, outputPath); err != nil {
+	if err := generate(ctx, content, theme, outputPath, []fs.FS{staticFS, fstest.MapFS(otherFiles)}); err != nil {
 		return fmt.Errorf("error generating: %w", err)
 	}
 
 	return nil
 }
 
-func generate(ctx context.Context, content Content, theme Theme, outputPath string) error {
+func generate(ctx context.Context, content Content, theme Theme, outputPath string, fsyss []fs.FS) error {
 	docFS, err := theme.Render(ctx, content)
 	if err != nil {
 		return err
 	}
 
-	return writeToDisk([]fs.FS{docFS, content.Static}, outputPath)
+	return writeToDisk(append([]fs.FS{docFS}, fsyss...), outputPath)
 }
 
 func config(fsys fs.FS, path string) (map[string]string, error) {

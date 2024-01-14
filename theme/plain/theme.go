@@ -17,8 +17,9 @@ var _ templum.Theme = Theme{}
 type Theme struct{}
 
 type pageContext struct {
-	Title  string
-	Active string
+	BaseURL string
+	Page    *templum.Page
+	Config  map[string]string
 }
 
 func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, error) {
@@ -33,7 +34,6 @@ func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, erro
 
 	memoryFS["style.css"] = &fstest.MapFile{Data: static.CSS}
 	memoryFS["main.js"] = &fstest.MapFile{Data: static.JS}
-	memoryFS["accordion.js"] = &fstest.MapFile{Data: static.AccordionJS}
 	memoryFS["search.js"] = &fstest.MapFile{Data: []byte(string(searchJS(content)) + string(static.SearchJS))}
 
 	return memoryFS, nil
@@ -59,7 +59,7 @@ func searchIndex(pages []*templum.Page) []map[string]string {
 
 			data = append(data, map[string]string{
 				"title": p.Title(),
-				"href":  p.Href(),
+				"href":  p.Link(),
 				"body":  md,
 			})
 		}
@@ -82,7 +82,7 @@ func toFiles(ctx context.Context, content templum.Content, pages []*templum.Page
 				return nil, err
 			}
 
-			files[p.Href()] = memoryFile
+			files[p.Link()] = memoryFile
 		}
 
 		if p.Type() == templum.Section {
@@ -99,18 +99,19 @@ func toFiles(ctx context.Context, content templum.Content, pages []*templum.Page
 }
 
 func toFile(ctx context.Context, content templum.Content, p *templum.Page) (*fstest.MapFile, error) {
-	mainContent, light, dark, err := p.HTML()
+	mainContent, err := p.HTML()
 	if err != nil {
 		return nil, err
 	}
 
 	context := &pageContext{
-		Title:  p.Title(),
-		Active: p.Slug(),
+		BaseURL: content.BaseURL,
+		Page:    p,
+		Config:  content.Config,
 	}
 
 	var htmlBuffer bytes.Buffer
-	if err := html(context, content.Config, content.Pages, mainContent, light, dark).Render(ctx, &htmlBuffer); err != nil {
+	if err := html(context, content.Pages, mainContent).Render(ctx, &htmlBuffer); err != nil {
 		return nil, err
 	}
 

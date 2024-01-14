@@ -1,0 +1,25 @@
+package plain
+
+templ menu_toggle() {
+	<div class="menu-toggle md:hidden cursor-pointer">
+		@hamburger()
+	</div>
+}
+
+templ dark_mode_toggle() {
+	<div class="hide-no-js dark-mode-toggle hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-600 font-bold py-2 px-4 rounded-lg cursor-pointer">
+	    <div class="dark:hidden">
+	        @moon()
+	    </div>
+	    <div class="hidden dark:block">
+            @sun()
+        </div>
+	</div>
+}
+
+templ github_link(c *pageContext) {
+    <a href={ templ.URL(c.Config["github_url"]) } class="hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-600 font-bold py-2 px-4 rounded-lg flex ml-2 flex-row space-x-2">
+        @github()
+        <span>GitHub</span>
+    </a>
+}

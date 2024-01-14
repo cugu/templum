@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestPage_Slug(t *testing.T) {
+func Test_slug(t *testing.T) {
 	type fields struct {
 		path string
 	}
@@ -26,10 +26,7 @@ func TestPage_Slug(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			p := &Page{
-				path: tt.fields.path,
-			}
-			if got := p.Slug(); got != tt.want {
+			if got := slug(tt.fields.path); got != tt.want {
 				t.Errorf("Slug() = %v, want %v", got, tt.want)
 			}
 		})
