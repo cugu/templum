@@ -23554,6 +23554,14 @@ video {
   transition-duration: 150ms;
 }
 
+/* common */
+
+.no-js .hide-no-js {
+  display: none;
+}
+
+/* sidebar */
+
 #sidebar {
   left: -100vw;
   transition: left 0.2s ease-out;
@@ -23569,22 +23577,25 @@ video {
   left: 0;
 }
 
-.inner {
-  overflow: hidden;
+#sidebar details > summary {
+  list-style: none;
 }
 
-.no-js .hide-no-js {
+#sidebar details > summary::marker, /* Latest Chrome, Edge, Firefox */
+#sidebar details > summary::-webkit-details-marker /* Safari */ {
   display: none;
 }
 
-.chevron > svg {
+#sidebar details > .chevron > svg {
   transform-origin: center;
   transition: transform 0.2s ease-out;
 }
 
-details[open] > summary > .chevron > svg {
+#sidebar details[open] > summary > .chevron > svg {
   transform: rotate(90deg);
 }
+
+/* syntax highlighting */
 
 pre.chroma {
   margin-top: 1.5rem;

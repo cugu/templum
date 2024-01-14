@@ -51,10 +51,8 @@ templ section(c *templum.PageContext, menuItem *templum.Page, depth int) {
 			</div>
 		</summary>
 		if len(menuItem.Children()) > 0 {
-			<div class="wrapper">
-				<div class="pl-1 inner">
-					@nav(c, menuItem.Children(), depth + 1)
-				</div>
+            <div class="pl-1">
+                @nav(c, menuItem.Children(), depth + 1)
 			</div>
 		}
 	</details>

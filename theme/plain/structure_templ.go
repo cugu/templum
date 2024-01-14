@@ -316,7 +316,7 @@ func header(c *templum.PageContext) templ.Component {
 
 		ctx = templ.ClearChildren(ctx)
 
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-full min-w-full p-4 flex flex-col md:flex-row text-gray-800 dark:text-gray-100\"><div class=\"flex flex-row w-full sm:w-64 md:hidden\"><div class=\"py-3\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-full min-w-full p-4 flex flex-col md:flex-row text-gray-800 dark:text-gray-100\"><div class=\"flex flex-row w-full sm:w-64 md:hidden\"><div class=\"py-3 mr-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -498,7 +498,7 @@ func footer(c *templum.PageContext) templ.Component {
 
 		ctx = templ.ClearChildren(ctx)
 
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-between min-h-full min-w-full p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 md:hidden border-t-2 dark:border-gray-600\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-between p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 border-t-2 dark:border-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -184,7 +184,7 @@ func section(c *templum.PageContext, menuItem *templum.Page, depth int) templ.Co
 		}
 
 		if len(menuItem.Children()) > 0 {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"wrapper\"><div class=\"pl-1 inner\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"pl-1\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -194,7 +194,7 @@ func section(c *templum.PageContext, menuItem *templum.Page, depth int) templ.Co
 				return templ_7745c5c3_Err
 			}
 
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -279,7 +279,7 @@ func link(c *templum.PageContext, menuItem *templum.Page) templ.Component {
 
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(menuItem.Title())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/nav.templ`, Line: 78, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/nav.templ`, Line: 76, Col: 20}
 		}
 
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
