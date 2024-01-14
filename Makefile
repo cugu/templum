@@ -11,7 +11,6 @@ install-dev: install
 	npm install -D postcss@latest autoprefixer@latest
 	npm install -g live-server@latest
 	npm install -D live-server@latest
-	go install github.com/cosmtrek/air@latest
 	go install github.com/bombsimon/wsl/v4/cmd...@master
 	go install mvdan.cc/gofumpt@latest
 	go install github.com/daixiang0/gci@latest
@@ -22,18 +21,6 @@ local_generate:
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
 	go run ./cmd/templum/. --content content --output public --config config.yaml --url "http://localhost:8080/"
-
-.PHONY: generate
-generate:
-	@echo "Generating..."
-	templ generate
-	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
-	go run ./cmd/templum/. --content content --output public --config config.yaml --url "https://cugu.github.io/templum/"
-
-.PHONY: watch
-watch:
-	@echo "Watching..."
-	air
 
 .PHONY: serve
 serve:
