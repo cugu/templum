@@ -11,6 +11,8 @@ import (
 	"io"
 
 	"github.com/a-h/templ"
+
+	"github.com/cugu/templum"
 )
 
 func menu_toggle() templ.Component {
@@ -103,7 +105,7 @@ func dark_mode_toggle() templ.Component {
 	})
 }
 
-func github_link(c *pageContext) templ.Component {
+func github_link(c *templum.PageContext) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {

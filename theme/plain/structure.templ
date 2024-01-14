@@ -2,7 +2,7 @@ package plain
 
 import "github.com/cugu/templum"
 
-templ html(c *pageContext, pages []*templum.Page, data string) {
+templ html(c *templum.PageContext, data string) {
 	<html class="no-js">
 		<head>
 			<title>{ c.Page.Title() }</title>
@@ -12,7 +12,7 @@ templ html(c *pageContext, pages []*templum.Page, data string) {
 			<link href={ c.BaseURL + "style.css" } rel="stylesheet"/>
 		</head>
 		<body class="bg-white dark:bg-gray-800 dark:text-gray-100">
-			@frame(header(c), sidebar(c, pages), content(data), footer(c))
+			@frame(header(c), sidebar(c), content(data), footer(c))
 			@script(c)
 			<script src={ c.BaseURL + "main.js" }></script>
 			<script src={ c.BaseURL + "search.js" }></script>
@@ -42,7 +42,7 @@ templ frame(headerContent, asideContent, mainContent, footerContent templ.Compon
 	</div>
 }
 
-templ logo(c *pageContext) {
+templ logo(c *templum.PageContext) {
 	<a href={ templ.URL(c.BaseURL) }>
 		<h1 class="text-2xl font-bold">
 			<img src={ c.BaseURL + "logo.svg" } alt="logo" class="h-12 w-52"/>
@@ -50,7 +50,7 @@ templ logo(c *pageContext) {
 	</a>
 }
 
-templ header(c *pageContext) {
+templ header(c *templum.PageContext) {
 	<div class="min-h-full min-w-full p-4 flex flex-col md:flex-row text-gray-800 dark:text-gray-100">
 		<div class="flex flex-row w-full sm:w-64 md:hidden">
 			<div class="py-3">
@@ -78,10 +78,10 @@ templ header(c *pageContext) {
 	</div>
 }
 
-templ sidebar(c *pageContext, pages []*templum.Page) {
+templ sidebar(c *templum.PageContext) {
 	<div class="min-h-full min-w-full p-4 border-r dark:border-gray-600 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:bg-gray-800 dark:text-gray-100 space-y-2">
 		@logo(c)
-		@nav(c, pages, 0)
+		@nav(c, c.Pages, 0)
 	</div>
 }
 
@@ -99,7 +99,7 @@ templ content(data string) {
 	</main>
 }
 
-templ footer(c *pageContext) {
+templ footer(c *templum.PageContext) {
 	<div class="flex justify-between min-h-full min-w-full p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 md:hidden border-t-2 dark:border-gray-600">
         @dark_mode_toggle()
 		@github_link(c)

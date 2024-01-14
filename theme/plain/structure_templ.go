@@ -15,7 +15,7 @@ import (
 	"github.com/cugu/templum"
 )
 
-func html(c *pageContext, pages []*templum.Page, data string) templ.Component {
+func html(c *templum.PageContext, data string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -74,7 +74,7 @@ func html(c *pageContext, pages []*templum.Page, data string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 
-		templ_7745c5c3_Err = frame(header(c), sidebar(c, pages), content(data), footer(c)).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = frame(header(c), sidebar(c), content(data), footer(c)).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -211,7 +211,7 @@ func frame(headerContent, asideContent, mainContent, footerContent templ.Compone
 	})
 }
 
-func logo(c *pageContext) templ.Component {
+func logo(c *templum.PageContext) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -263,7 +263,7 @@ func logo(c *pageContext) templ.Component {
 	})
 }
 
-func header(c *pageContext) templ.Component {
+func header(c *templum.PageContext) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -348,7 +348,7 @@ func header(c *pageContext) templ.Component {
 	})
 }
 
-func sidebar(c *pageContext, pages []*templum.Page) templ.Component {
+func sidebar(c *templum.PageContext) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -375,7 +375,7 @@ func sidebar(c *pageContext, pages []*templum.Page) templ.Component {
 			return templ_7745c5c3_Err
 		}
 
-		templ_7745c5c3_Err = nav(c, pages, 0).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = nav(c, c.Pages, 0).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -445,7 +445,7 @@ func content(data string) templ.Component {
 	})
 }
 
-func footer(c *pageContext) templ.Component {
+func footer(c *templum.PageContext) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
