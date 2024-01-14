@@ -17651,18 +17651,12 @@ video {
   left: 0;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.2s ease-out;
-}
-
-.active > .wrapper {
-  grid-template-rows: 1fr;
-}
-
 .inner {
   overflow: hidden;
+}
+
+.no-js .hide-no-js {
+  display: none;
 }
 
 .chevron > svg {
@@ -17670,7 +17664,7 @@ video {
   transition: transform 0.2s ease-out;
 }
 
-.active > div > .chevron > svg {
+details[open] > summary > .chevron > svg {
   transform: rotate(90deg);
 }
 

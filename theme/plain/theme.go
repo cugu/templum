@@ -34,7 +34,6 @@ func (t Theme) Render(ctx context.Context, content templum.Content) (fs.FS, erro
 
 	memoryFS["style.css"] = &fstest.MapFile{Data: static.CSS}
 	memoryFS["main.js"] = &fstest.MapFile{Data: static.JS}
-	memoryFS["accordion.js"] = &fstest.MapFile{Data: static.AccordionJS}
 	memoryFS["search.js"] = &fstest.MapFile{Data: []byte(string(searchJS(content)) + string(static.SearchJS))}
 
 	return memoryFS, nil

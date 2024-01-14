@@ -55,7 +55,7 @@ func dark_mode_toggle() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"dark-mode-toggle hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-600 font-bold py-2 px-4 rounded-lg cursor-pointer\"><div class=\"dark:hidden\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"hide-no-js dark-mode-toggle hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-600 font-bold py-2 px-4 rounded-lg cursor-pointer\"><div class=\"dark:hidden\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -1,4 +1,4 @@
-<img src="templum.png" width="400" height="400" align="right">
+<img src="./content/docs/templum.png" width="400" height="400" align="right">
 
 # templum
 
