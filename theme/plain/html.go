@@ -2,10 +2,11 @@ package plain
 
 import (
 	"context"
-	"github.com/cugu/templum"
 	"io"
 
 	"github.com/a-h/templ"
+
+	"github.com/cugu/templum"
 )
 
 func raw(s string) templ.Component {

@@ -13,8 +13,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-type MemoryFS = fstest.MapFS
-type MemoryFile = fstest.MapFile
+type (
+	MemoryFS   = fstest.MapFS
+	MemoryFile = fstest.MapFile
+)
 
 type SiteContext struct {
 	BaseURL    string

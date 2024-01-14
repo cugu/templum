@@ -5,12 +5,15 @@ package plain
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 
-import "github.com/a-h/templ"
-import "context"
-import "io"
-import "bytes"
+import (
+	"bytes"
+	"context"
+	"io"
 
-import "github.com/cugu/templum"
+	"github.com/a-h/templ"
+
+	"github.com/cugu/templum"
+)
 
 func html(c *templum.PageContext, data string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
@@ -19,94 +22,121 @@ func html(c *templum.PageContext, data string) templ.Component {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var1 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var1 == nil {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<html class=\"no-js\"><head><title>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		var templ_7745c5c3_Var2 string
+
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(c.Page.Title())
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `theme/plain/structure.templ`, Line: 7, Col: 26}
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(c.BaseURL + "favicon.ico"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" rel=\"icon\"><link href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(c.BaseURL + "style.css"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" rel=\"stylesheet\"></head><body class=\"bg-white dark:bg-gray-800 dark:text-gray-100\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = frame(header(c), sidebar(c), content(data), footer(c)).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = script(c).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<script src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(c.BaseURL + "main.js"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Var3 := ``
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script><script src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(c.BaseURL + "search.js"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Var4 := ``
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
@@ -118,51 +148,65 @@ func frame(headerContent, asideContent, mainContent, footerContent templ.Compone
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var5 == nil {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"frame\" class=\"flex min-h-screen w-full overflow-x-hidden\"><aside id=\"sidebar\" class=\"fixed w-10/12 md:w-64 flex flex-col h-full md:h-screen z-20\"><div class=\"overflow-y-auto w-full h-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = asideContent.Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></aside><div class=\"flex flex-col flex-1 md:ml-64 overflow-hidden\"><div id=\"overlay\" class=\"fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden cursor-pointer\"></div><header class=\"sticky top-0 w-full flex flex-row\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = headerContent.Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</header><main class=\"flex-1\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = mainContent.Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</main><footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = footerContent.Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</footer></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
@@ -174,36 +218,47 @@ func logo(c *templum.PageContext) templ.Component {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var6 == nil {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		var templ_7745c5c3_Var7 templ.SafeURL = templ.URL(c.BaseURL)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var7)))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><h1 class=\"text-2xl font-bold\"><img src=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(c.BaseURL + "logo.svg"))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" alt=\"logo\" class=\"h-12 w-52\"></h1></a>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
@@ -215,63 +270,80 @@ func header(c *templum.PageContext) templ.Component {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var8 == nil {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-full min-w-full p-4 flex flex-col md:flex-row text-gray-800 dark:text-gray-100\"><div class=\"flex flex-row w-full sm:w-64 md:hidden\"><div class=\"py-3\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = menu_toggle().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = logo(c).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><div class=\"flex flex-row flex-1 items-center justify-between space-x-2 mt-2 sm:mt-0\"><div><div class=\"hide-no-js relative flex items-center space-x-2 m-0 w-full md:w-96\"><input id=\"search\" type=\"text\" name=\"q\" placeholder=\"Search\" class=\"pl-10 py-2 pr-10 text-gray-700 dark:bg-gray-700 dark:text-gray-100 w-full rounded-lg border dark:border-gray-600\"><div class=\"absolute\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = magnifyingGlass().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><span id=\"search-clear\" class=\"absolute right-0 pr-2 text-gray-700 dark:text-gray-100 cursor-pointer\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = x().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div><div class=\"hidden md:flex flex-row\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = dark_mode_toggle().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = github_link(c).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
@@ -283,31 +355,40 @@ func sidebar(c *templum.PageContext) templ.Component {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var9 == nil {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"min-h-full min-w-full p-4 border-r dark:border-gray-600 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:bg-gray-800 dark:text-gray-100 space-y-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = logo(c).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = nav(c, c.Pages, 0).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
@@ -319,36 +400,47 @@ func content(data string) templ.Component {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var10 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var10 == nil {
 			templ_7745c5c3_Var10 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section id=\"search-results\" class=\"hidden flex-1 p-4 max-w-prose\"><div class=\"prose dark:prose-invert\"><h1>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Var11 := `Search results`
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1></div><div id=\"search-results-list\"></div></section><main id=\"main\" class=\"p-4 prose dark:prose-invert\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = raw(data).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
@@ -360,31 +452,40 @@ func footer(c *templum.PageContext) templ.Component {
 			templ_7745c5c3_Buffer = templ.GetBuffer()
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
+
 		ctx = templ.InitializeContext(ctx)
+
 		templ_7745c5c3_Var12 := templ.GetChildren(ctx)
 		if templ_7745c5c3_Var12 == nil {
 			templ_7745c5c3_Var12 = templ.NopComponent
 		}
+
 		ctx = templ.ClearChildren(ctx)
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex justify-between min-h-full min-w-full p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 md:hidden border-t-2 dark:border-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = dark_mode_toggle().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		templ_7745c5c3_Err = github_link(c).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+
 		if !templ_7745c5c3_IsBuffer {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
 		}
+
 		return templ_7745c5c3_Err
 	})
 }
