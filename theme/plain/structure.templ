@@ -45,7 +45,14 @@ templ frame(headerContent, asideContent, mainContent, footerContent templ.Compon
 templ logo(c *templum.PageContext) {
 	<a href={ templ.URL(c.BaseURL) }>
 		<h1 class="text-2xl font-bold">
-			<img src={ c.BaseURL + "logo.svg" } alt="logo" class="h-12 w-52"/>
+		    if logo, ok := c.Config["logo"]; ok {
+                <img src={ c.BaseURL + logo } alt="logo" class="h-12 w-52"/>
+            }
+            if title, ok := c.Config["title"]; ok {
+                <h1 class="text-2xl font-bold">
+                    { title }
+                </h1>
+            }
 		</h1>
 	</a>
 }
