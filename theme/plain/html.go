@@ -15,11 +15,9 @@ func raw(s string) templ.Component {
 	})
 }
 
-func script(config map[string]string) templ.Component {
+func script(c *pageContext) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
-		baseURL := config["base_url"]
-
-		s := "<script>var base_url = '" + baseURL + "';</script>"
+		s := "<script>var base_url = '" + c.BaseURL + "';</script>"
 
 		_, err := io.WriteString(w, s)
 

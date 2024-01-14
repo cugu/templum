@@ -88,32 +88,16 @@ func baseParts(path string) (string, int) {
 	return filename, -1
 }
 
-func (p *Page) Slug() string {
+func (p *Page) Link() string {
+	if p.pageType == Section {
+		return slug(p.path) + "/"
+	}
+
 	if p.path == "index.md" {
-		return "index"
+		return "index.html"
 	}
 
-	noExt := strings.TrimSuffix(p.path, filepath.Ext(p.path))
-
-	htmlPath := ""
-
-	for _, r := range strings.Split(noExt, "/") {
-		name, _ := baseParts(r)
-		htmlPath = path.Join(htmlPath, name)
-	}
-
-	for _, r := range []string{"\\", " ", ".", "_"} {
-		htmlPath = strings.ReplaceAll(htmlPath, r, "-")
-	}
-
-	htmlPath = strings.ToLower(htmlPath)
-	htmlPath = strings.Trim(htmlPath, "-")
-
-	return htmlPath
-}
-
-func (p *Page) Href() string {
-	return p.Slug() + ".html"
+	return slug(strings.TrimSuffix(p.path, filepath.Ext(p.path))) + ".html"
 }
 
 func (p *Page) Markdown() (string, error) {
@@ -195,4 +179,22 @@ func (p *Page) AddChildren(child ...*Page) {
 
 func (p *Page) Children() []*Page {
 	return p.children
+}
+
+func slug(p string) string {
+	htmlPath := ""
+
+	for _, r := range strings.Split(p, "/") {
+		name, _ := baseParts(r)
+		htmlPath = path.Join(htmlPath, name)
+	}
+
+	for _, r := range []string{"\\", " ", ".", "_"} {
+		htmlPath = strings.ReplaceAll(htmlPath, r, "-")
+	}
+
+	htmlPath = strings.ToLower(htmlPath)
+	htmlPath = strings.Trim(htmlPath, "-")
+
+	return htmlPath
 }

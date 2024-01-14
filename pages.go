@@ -2,34 +2,36 @@ package templum
 
 import (
 	"io/fs"
+	"maps"
 	"path/filepath"
 	"slices"
 	"strings"
+	"testing/fstest"
 )
 
-func newPages(fsys fs.FS, root string) ([]*Page, error) {
+func newPages(fsys fs.FS, root string) ([]*Page, map[string]*fstest.MapFile, error) {
 	var pages []*Page
 
 	entries, err := fs.ReadDir(fsys, root)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	for _, entry := range entries {
-		if !(entry.IsDir() || filepath.Ext(entry.Name()) == ".md") {
-			continue
-		}
+	otherFiles := map[string]*fstest.MapFile{}
 
+	for _, entry := range entries {
 		path := filepath.Join(root, entry.Name())
 
 		switch {
 		case entry.IsDir():
 			section := NewSectionPage(path)
 
-			subPages, err := newPages(fsys, path)
+			subPages, subOtherFiles, err := newPages(fsys, path)
 			if err != nil {
-				return nil, err
+				return nil, nil, err
 			}
+
+			maps.Copy(otherFiles, subOtherFiles)
 
 			section.AddChildren(subPages...)
 
@@ -37,13 +39,18 @@ func newPages(fsys fs.FS, root string) ([]*Page, error) {
 		case filepath.Ext(entry.Name()) == ".md":
 			pages = append(pages, NewMarkdownPage(fsys, path))
 		default:
-			continue
+			data, err := fs.ReadFile(fsys, path)
+			if err != nil {
+				return nil, nil, err
+			}
+
+			otherFiles[slug(path)+filepath.Ext(path)] = &fstest.MapFile{Data: data}
 		}
 	}
 
 	slices.SortFunc(pages, sortPages)
 
-	return pages, nil
+	return pages, otherFiles, nil
 }
 
 func sortPages(a, b *Page) int {

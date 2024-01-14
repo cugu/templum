@@ -21,14 +21,14 @@ local_generate:
 	@echo "Generating..."
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
-	go run ./cmd/templum/. --config local_config.yaml --content content --output public
+	go run ./cmd/templum/. --content content --output public --config config.yaml --url "http://localhost:8080/"
 
 .PHONY: generate
 generate:
 	@echo "Generating..."
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
-	go run ./cmd/templum/. --content content --output public --config local_config.yaml
+	go run ./cmd/templum/. --content content --output public --config config.yaml --url "https://cugu.github.io/templum/"
 
 .PHONY: watch
 watch:
