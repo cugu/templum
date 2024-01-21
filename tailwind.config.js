@@ -19,24 +19,22 @@ const defaultCss = {
 module.exports = {
     darkMode: 'class',
     content: [
+        "./theme/plain/static/in.css",
         "./theme/**/*.js",
         "./theme/**/*.templ",
         "./content/**/*.md"
     ],
     safelist: [
         "anchor",
-        {
-            pattern: /bg-+/,
-        },
     ],
     theme: {
         extend: {
             typography: {
-                DEFAULT: { css: defaultCss },
-                sm: { css: disabledCss },
-                lg: { css: disabledCss },
-                xl: { css: disabledCss },
-                '2xl': { css: disabledCss },
+                DEFAULT: {css: defaultCss},
+                sm: {css: disabledCss},
+                lg: {css: disabledCss},
+                xl: {css: disabledCss},
+                '2xl': {css: disabledCss},
             },
         },
     },
