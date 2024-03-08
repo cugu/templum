@@ -78,7 +78,6 @@ templ header(c *templum.PageContext) {
                 </div>
             </div>
 			<div class="hidden md:flex flex-row">
-				@dark_mode_toggle()
 				@github_link(c)
 			</div>
 		</div>
@@ -102,13 +101,12 @@ templ content(data string) {
 		<div id="search-results-list"></div>
 	</section>
 	<main id="main" class="p-4 prose dark:prose-invert">
-		@raw(data)
+		templ.Raw(data)
 	</main>
 }
 
 templ footer(c *templum.PageContext) {
 	<div class="md:hidden flex justify-between p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 border-t-2 dark:border-gray-600">
-        @dark_mode_toggle()
 		@github_link(c)
 	</div>
 }

@@ -17,7 +17,6 @@ const defaultCss = {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: 'class',
     content: [
         "./theme/plain/static/in.css",
         "./theme/**/*.js",
