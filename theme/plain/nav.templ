@@ -1,7 +1,7 @@
 package plain
 
 import (
-    "strings"
+	"strings"
 
 	"github.com/cugu/templum"
 )
@@ -51,8 +51,8 @@ templ section(c *templum.PageContext, menuItem *templum.Page, depth int) {
 			</div>
 		</summary>
 		if len(menuItem.Children()) > 0 {
-            <div class="pl-1">
-                @nav(c, menuItem.Children(), depth + 1)
+			<div class="pl-1">
+				@nav(c, menuItem.Children(), depth+1)
 			</div>
 		}
 	</details>

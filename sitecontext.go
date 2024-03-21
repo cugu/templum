@@ -79,6 +79,10 @@ func generatePages(fsys fs.FS, root string) ([]*Page, MemoryFS, error) {
 	otherFiles := map[string]*MemoryFile{}
 
 	for _, entry := range entries {
+		if strings.HasPrefix(entry.Name(), "_") {
+			continue
+		}
+
 		path := filepath.Join(root, entry.Name())
 
 		switch {

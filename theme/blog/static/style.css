@@ -1,0 +1,340 @@
+:root {
+    --flexoki-black: #100F0F;
+    --flexoki-paper: #FFFCF0;
+
+    --flexoki-950: #1C1B1A;
+    --flexoki-900: #282726;
+    --flexoki-850: #343331;
+    --flexoki-800: #403E3C;
+    --flexoki-700: #575653;
+    --flexoki-600: #6F6E69;
+    --flexoki-500: #878580;
+    --flexoki-300: #B7B5AC;
+    --flexoki-200: #CECDC3;
+    --flexoki-150: #DAD8CE;
+    --flexoki-100: #E6E4D9;
+    --flexoki-50: #F2F0E5;
+
+    --flexoki-red-600: #AF3029;
+    --flexoki-red-400: #D14D41;
+
+    --flexoki-orange-600: #BC5215;
+    --flexoki-orange-400: #DA702C;
+
+    --flexoki-yellow-900: #4D3A0B;
+    --flexoki-yellow-600: #AD8301;
+    --flexoki-yellow-400: #D0A215;
+    --flexoki-yellow-100: #FCEEB8;
+
+    --flexoki-green-600: #66800B;
+    --flexoki-green-400: #879A39;
+
+    --flexoki-cyan-950: #142625;
+    --flexoki-cyan-600: #24837B;
+    --flexoki-cyan-400: #3AA99F;
+    --flexoki-cyan-50: #EBF2E7;
+
+    --flexoki-blue-600: #205EA6;
+    --flexoki-blue-400: #4385BE;
+
+    --flexoki-purple-600: #5E409D;
+    --flexoki-purple-400: #8B7EC8;
+
+    --flexoki-magenta-600: #A02F6F;
+    --flexoki-magenta-400: #CE5D97;
+
+    --flexoki-bg: var(--flexoki-paper);
+    --flexoki-bg-2: var(--flexoki-50);
+
+    --flexoki-tx: var(--flexoki-black);
+    --flexoki-tx-2: var(--flexoki-600);
+    --flexoki-tx-3: var(--flexoki-300);
+
+    --flexoki-ui: var(--flexoki-100);
+    --flexoki-ui-2: var(--flexoki-150);
+    --flexoki-ui-3: var(--flexoki-200);
+
+    --flexoki-re: var(--flexoki-red-600);
+    --flexoki-or: var(--flexoki-orange-600);
+    --flexoki-ye: var(--flexoki-yellow-600);
+    --flexoki-gr: var(--flexoki-green-600);
+    --flexoki-cy: var(--flexoki-cyan-600);
+    --flexoki-bl: var(--flexoki-blue-600);
+    --flexoki-pu: var(--flexoki-purple-600);
+    --flexoki-ma: var(--flexoki-magenta-600);
+
+    --flexoki-re-2: var(--flexoki-red-400);
+    --flexoki-or-2: var(--flexoki-orange-400);
+    --flexoki-ye-2: var(--flexoki-yellow-400);
+    --flexoki-gr-2: var(--flexoki-green-400);
+    --flexoki-cy-2: var(--flexoki-cyan-400);
+    --flexoki-bl-2: var(--flexoki-blue-400);
+    --flexoki-pu-2: var(--flexoki-purple-400);
+    --flexoki-ma-2: var(--flexoki-magenta-400);
+
+    --fg: var(--flexoki-tx);
+    --bg: var(--flexoki-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --flexoki-bg: var(--flexoki-black);
+        --flexoki-bg-2: var(--flexoki-950);
+
+        --flexoki-tx: var(--flexoki-200);
+        --flexoki-tx-2: var(--flexoki-500);
+        --flexoki-tx-3: var(--flexoki-700);
+
+        --flexoki-ui: var(--flexoki-900);
+        --flexoki-ui-2: var(--flexoki-850);
+        --flexoki-ui-3: var(--flexoki-800);
+
+        --flexoki-re: var(--flexoki-red-400);
+        --flexoki-or: var(--flexoki-orange-400);
+        --flexoki-ye: var(--flexoki-yellow-400);
+        --flexoki-gr: var(--flexoki-green-400);
+        --flexoki-cy: var(--flexoki-cyan-400);
+        --flexoki-bl: var(--flexoki-blue-400);
+        --flexoki-pu: var(--flexoki-purple-400);
+        --flexoki-ma: var(--flexoki-magenta-400);
+
+        --flexoki-re-2: var(--flexoki-red-600);
+        --flexoki-or-2: var(--flexoki-orange-600);
+        --flexoki-ye-2: var(--flexoki-yellow-600);
+        --flexoki-gr-2: var(--flexoki-green-600);
+        --flexoki-cy-2: var(--flexoki-cyan-600);
+        --flexoki-bl-2: var(--flexoki-blue-600);
+        --flexoki-pu-2: var(--flexoki-purple-600);
+        --flexoki-ma-2: var(--flexoki-magenta-600);
+
+        --fg: var(--flexoki-tx);
+        --bg: var(--flexoki-bg);
+    }
+}
+
+.note, .tip, .info, .warning, .critical, .caution {
+    margin: 0 0 1.6rem 0;
+    padding: 1rem 1.6rem;
+    border: 0.2rem solid var(--flexoki-ui);
+    background-color: var(--flexoki-bg-2);
+}
+
+.note > *:first-child, .tip > *:first-child, .info > *:first-child, .warning > *:first-child, .critical > *:first-child, .caution > *:first-child {
+    margin-top: 0;
+}
+
+.note > *:last-child, .tip > *:last-child, .info > *:last-child, .warning > *:last-child, .critical > *:last-child, .caution > *:last-child {
+    margin-bottom: 0;
+}
+
+.note {
+    border-color: var(--flexoki-bl);
+    color: var(--flexoki-bl);
+}
+
+.tip {
+    border-color: var(--flexoki-gr);
+    color: var(--flexoki-gr);
+}
+
+.info {
+    border-color: var(--flexoki-pu);
+    color: var(--flexoki-pu);
+}
+
+.warning {
+    border-color: var(--flexoki-ye);
+    color: var(--flexoki-ye);
+}
+
+.critical, .caution {
+    border-color: var(--flexoki-re);
+    color: var(--flexoki-re);
+}
+
+/* no-underline text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400; */
+
+.anchor {
+    text-decoration: none;
+    color: var(--flexoki-bg);
+}
+
+.anchor:hover {
+    color: var(--flexoki-tx-2);
+}
+
+/* syntax highlighting */
+
+pre.chroma {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    border-radius: 0.5rem;
+    color: var(--flexoki-tx);
+    background-color: var(--flexoki-bg-2);
+    padding: 1rem;
+
+    border: 0.2rem solid var(--flexoki-ui);
+}
+
+/* LineLink */
+.chroma .lnlinks {
+    outline: none;
+    text-decoration: none;
+    color: inherit
+}
+
+/* LineTableTD */
+.chroma .lntd {
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* LineTable */
+.chroma .lntable {
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* Line */
+.chroma .line {
+    display: flex;
+}
+
+/* GenericEmph */
+.chroma .ge {
+    font-style: italic
+}
+
+/* GenericStrong */
+.chroma .gs {
+    font-weight: bold
+}
+
+/* GenericHeading */
+.chroma .gh {
+    font-weight: bold
+}
+
+/* GenericPrompt */
+.chroma .gp {
+    font-weight: bold
+}
+
+/* GenericSubheading */
+.chroma .gu {
+    font-weight: bold
+}
+
+/* LineHighlight */
+.chroma .hl {
+    background-color: #e5e5e5
+}
+
+
+/* LineNumbersTable */
+.chroma .lnt {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0 0.4em 0 0.4em;
+    color: var(--flexoki-tx-3);
+}
+
+/* #7f7f7f */
+/* LineNumbers */
+.chroma .ln {
+    white-space: pre;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 0.4em;
+    padding: 0 0.4em 0 0.4em;
+    color: var(--flexoki-tx-3);
+}
+
+/* Keyword */
+/* KeywordConstant */
+/* KeywordDeclaration */
+/* KeywordNamespace */
+/* KeywordPseudo */
+/* KeywordReserved */
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr {
+    color: var(--flexoki-bl);
+}
+
+/* #0000ff */
+/* KeywordType */
+/* NameClass */
+.chroma .kt,
+.chroma .nc {
+    color: var(--flexoki-gr);
+}
+
+/* #2b91af */
+/* LiteralString */
+/* LiteralStringAffix */
+/* LiteralStringBacktick */
+/* LiteralStringChar */
+/* LiteralStringDelimiter */
+/* LiteralStringDoc */
+/* LiteralStringDouble */
+/* LiteralStringEscape */
+/* LiteralStringHeredoc */
+/* LiteralStringInterpol */
+/* LiteralStringOther */
+/* LiteralStringRegex */
+/* LiteralStringSingle */
+/* LiteralStringSymbol */
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .dl,
+.chroma .sd,
+.chroma .s2,
+.chroma .se,
+.chroma .sh,
+.chroma .si,
+.chroma .sx,
+.chroma .sr,
+.chroma .s1,
+.chroma .ss {
+    color: var(--flexoki-re)
+}
+
+/* #a31515 */
+/* OperatorWord */
+.chroma .ow {
+    color: var(--flexoki-bl)
+}
+
+/* #0000ff */
+/* Comment */
+/* CommentHashbang */
+/* CommentMultiline */
+/* CommentSingle */
+/* CommentSpecial */
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs {
+    color: var(--flexoki-tx-3)
+}
+
+/* CommentPreproc */
+/* CommentPreprocFile */
+.chroma .cp,
+.chroma .cpf {
+    color: var(--flexoki-bl)
+}
