@@ -1,31 +1,19 @@
 package templum
 
 import (
-	"bytes"
 	"errors"
 	"io/fs"
 	"path"
 	"path/filepath"
 	"strconv"
 	"strings"
-
-	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
-	fences "github.com/stefanfritsch/goldmark-fences"
-	"github.com/yuin/goldmark"
-	highlighting "github.com/yuin/goldmark-highlighting/v2"
-	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/parser"
-	"github.com/yuin/goldmark/renderer/html"
-	"go.abhg.dev/goldmark/anchor"
-	"go.abhg.dev/goldmark/mermaid"
-	"mvdan.cc/xurls/v2"
 )
 
 type PageType int
 
 const (
 	Section PageType = iota
-	Markdown
+	MarkdownPage
 )
 
 type Page struct {
@@ -40,7 +28,7 @@ func NewMarkdownPage(fsys fs.FS, path string) *Page {
 	return &Page{
 		fsys:     fsys,
 		path:     path,
-		pageType: Markdown,
+		pageType: MarkdownPage,
 	}
 }
 
@@ -107,7 +95,7 @@ func (p *Page) Link() string {
 }
 
 func (p *Page) Markdown() (string, error) {
-	if p.pageType != Markdown {
+	if p.pageType != MarkdownPage {
 		return "", errors.New("page is not markdown")
 	}
 
@@ -117,54 +105,6 @@ func (p *Page) Markdown() (string, error) {
 	}
 
 	return string(b), nil
-}
-
-func (p *Page) HTML() (string, error) {
-	b, err := p.Markdown()
-	if err != nil {
-		return "", err
-	}
-
-	var htmlBuffer bytes.Buffer
-
-	markdown := goldmark.New(
-		goldmark.WithParserOptions(
-			parser.WithAutoHeadingID(),
-		),
-		goldmark.WithRendererOptions(
-			html.WithXHTML(),
-			html.WithUnsafe(),
-		),
-		goldmark.WithExtensions(
-			&anchor.Extender{
-				Texter: anchor.Text("#"),
-			},
-			extension.NewLinkify(
-				extension.WithLinkifyAllowedProtocols([][]byte{
-					[]byte("http:"),
-					[]byte("https:"),
-				}),
-				extension.WithLinkifyURLRegexp(
-					xurls.Strict(),
-				),
-			),
-			&mermaid.Extender{},
-			&fences.Extender{},
-			highlighting.NewHighlighting(
-				highlighting.WithStyle("vs"),
-				highlighting.WithFormatOptions(
-					chromahtml.WithLineNumbers(true),
-					chromahtml.WithClasses(true),
-				),
-			),
-		),
-	)
-
-	if err := markdown.Convert([]byte(b), &htmlBuffer); err != nil {
-		return "", err
-	}
-
-	return htmlBuffer.String(), nil
 }
 
 func (p *Page) AddChildren(child ...*Page) {

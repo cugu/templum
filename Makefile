@@ -17,7 +17,7 @@ local_generate:
 	@echo "Generating..."
 	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
-	go run ./cmd/templum/. --content content --output public --theme blog --url "http://localhost:8080/"
+	go run ./cmd/templum/. --content content --output public --url "http://localhost:8080/"
 
 .PHONY: serve
 serve:

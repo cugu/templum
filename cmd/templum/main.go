@@ -8,7 +8,6 @@ import (
 	"os"
 
 	"github.com/cugu/templum"
-	"github.com/cugu/templum/theme/blog"
 	"github.com/cugu/templum/theme/plain"
 )
 
@@ -37,8 +36,6 @@ func generateCmd(ctx context.Context, args []string) {
 	switch *themeFlag {
 	case "plain":
 		theme = plain.Theme{}
-	case "blog":
-		theme = blog.Theme{}
 	default:
 		fmt.Printf("unknown theme: %s\n", *themeFlag) //nolint:forbidigo
 		os.Exit(1)

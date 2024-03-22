@@ -36,7 +36,7 @@ func toFiles(ctx context.Context, context *templum.SiteContext, pages []*templum
 	files := map[string]*templum.MemoryFile{}
 
 	for _, p := range pages {
-		if p.Type() == templum.Markdown {
+		if p.Type() == templum.MarkdownPage {
 			memoryFile, err := toFile(ctx, context, p)
 			if err != nil {
 				return nil, err
@@ -59,7 +59,7 @@ func toFiles(ctx context.Context, context *templum.SiteContext, pages []*templum
 }
 
 func toFile(ctx context.Context, context *templum.SiteContext, p *templum.Page) (*templum.MemoryFile, error) {
-	mainContent, err := p.HTML()
+	mainContent, err := p.Markdown()
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func searchIndex(pages []*templum.Page) []map[string]string {
 	var data []map[string]string
 
 	for _, p := range pages {
-		if p.Type() == templum.Markdown {
+		if p.Type() == templum.MarkdownPage {
 			md, err := p.Markdown()
 			if err != nil {
 				continue
