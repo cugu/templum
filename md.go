@@ -5,6 +5,7 @@ import (
 	"context"
 	"io"
 
+	d2 "github.com/FurqanSoftware/goldmark-d2"
 	"github.com/a-h/templ"
 	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
 	fences "github.com/stefanfritsch/goldmark-fences"
@@ -43,6 +44,9 @@ func md2html(md string) (string, error) {
 				),
 			),
 			&mermaid.Extender{},
+			&d2.Extender{
+				Sketch: true,
+			},
 			&fences.Extender{},
 			highlighting.NewHighlighting(
 				highlighting.WithStyle("vs"),
