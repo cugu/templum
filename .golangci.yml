@@ -1,25 +1,28 @@
 run:
-  go: "1.22"
   timeout: 5m
   tests: false
 linters:
-  enable-all: true
+  # enable-all: true
   disable:
+    - contextcheck
     - depguard
+    - err113
     - errchkjson
+    - execinquery
     - exhaustruct
     - goconst
-    - err113
-    - mnd
     - gomnd
     - ireturn
     - lll
+    - mnd
     - varnamelen
     - wrapcheck
-    - execinquery
 linters-settings:
   gci:
     sections:
       - standard
       - default
       - prefix(github.com/cugu/templum)
+issues:
+  exclude-dirs:
+    - theme

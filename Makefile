@@ -1,16 +1,16 @@
 .PHONY: install
 install:
 	@echo "Installing..."
-	go install github.com/a-h/templ/cmd/templ@latest
+	go install github.com/a-h/templ/cmd/templ@v0.2.747
 	npm install tailwindcss@latest @tailwindcss/typography
 
 .PHONY: install-dev
 install-dev: install
 	@echo "Installing..."
 	npm install -D live-server@latest
-	go install github.com/bombsimon/wsl/v4/cmd...@master
-	go install mvdan.cc/gofumpt@latest
-	go install github.com/daixiang0/gci@latest
+	go install github.com/bombsimon/wsl/v4/cmd...@v4.4.1
+	go install mvdan.cc/gofumpt@v0.7.0
+	go install github.com/daixiang0/gci@v0.13.4
 
 .PHONY: local_generate
 local_generate:
@@ -35,7 +35,7 @@ fmt:
 .PHONE: lint
 lint:
 	@echo "Linting..."
-	golangci-lint run ./...
+	golangci-lint run -v ./...
 
 .PHONY: test
 test:
