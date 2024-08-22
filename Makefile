@@ -35,7 +35,7 @@ fmt:
 .PHONE: lint
 lint:
 	@echo "Linting..."
-	golangci-lint run ./...
+	golangci-lint run -v ./...
 
 .PHONY: test
 test:

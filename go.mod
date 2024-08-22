@@ -1,6 +1,6 @@
 module github.com/cugu/templum
 
-go 1.22.1
+go 1.23.0
 
 require (
 	github.com/FurqanSoftware/goldmark-d2 v0.0.0-20240222042550-23ef2a4e585c
