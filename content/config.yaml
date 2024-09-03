@@ -1,3 +1,6 @@
 github_url: "https://github.com/cugu/templum"
 logo: "templum.svg"
 title: "templum"
+
+d2_sketch: false
+d2_theme_name: "Vanilla nitro cola"

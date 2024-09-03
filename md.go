@@ -17,10 +17,34 @@ import (
 	"go.abhg.dev/goldmark/anchor"
 	"go.abhg.dev/goldmark/mermaid"
 	"mvdan.cc/xurls/v2"
+	"oss.terrastruct.com/d2/d2themes/d2themescatalog"
 )
 
-func md2html(md string) (string, error) {
+func md2html(config map[string]string, md string) (string, error) {
 	var htmlBuffer bytes.Buffer
+
+	d2Settings := &d2.Extender{}
+
+	if d2Sketch, ok := config["d2_sketch"]; ok {
+		d2Settings.Sketch = d2Sketch == "true"
+	}
+
+	if d2ThemeName, ok := config["d2_theme_name"]; ok {
+		for _, theme := range d2themescatalog.LightCatalog {
+			if theme.Name == d2ThemeName {
+				d2Settings.ThemeID = &theme.ID
+
+				break
+			}
+		}
+		for _, theme := range d2themescatalog.DarkCatalog {
+			if theme.Name == d2ThemeName {
+				d2Settings.ThemeID = &theme.ID
+
+				break
+			}
+		}
+	}
 
 	markdown := goldmark.New(
 		goldmark.WithParserOptions(
@@ -44,9 +68,7 @@ func md2html(md string) (string, error) {
 				),
 			),
 			&mermaid.Extender{},
-			&d2.Extender{
-				Sketch: true,
-			},
+			d2Settings,
 			&fences.Extender{},
 			highlighting.NewHighlighting(
 				highlighting.WithStyle("vs"),
@@ -65,9 +87,9 @@ func md2html(md string) (string, error) {
 	return htmlBuffer.String(), nil
 }
 
-func Markdown(md string) templ.Component {
+func Markdown(c *PageContext, md string) templ.Component {
 	return templ.ComponentFunc(func(_ context.Context, w io.Writer) error {
-		s, err := md2html(md)
+		s, err := md2html(c.Config, md)
 		if err != nil {
 			return err
 		}
