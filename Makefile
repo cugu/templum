@@ -22,7 +22,7 @@ local_generate:
 .PHONY: serve
 serve:
 	@echo "Serving..."
-	live-server --host=localhost public
+	cd public && live-server --host=localhost --port=8080
 
 .PHONY: fmt
 fmt:

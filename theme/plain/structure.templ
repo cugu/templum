@@ -12,7 +12,7 @@ templ html(c *templum.PageContext, data string) {
 			<link href={ c.BaseURL + "style.css" } rel="stylesheet"/>
 		</head>
 		<body class="bg-white dark:bg-gray-800 dark:text-gray-100">
-			@frame(header(c), sidebar(c), content(data), footer(c))
+			@frame(header(c), sidebar(c), content(c, data), footer(c))
 			@script(c)
 			<script src={ c.BaseURL + "main.js" }></script>
 			<script src={ c.BaseURL + "search.js" }></script>
@@ -91,7 +91,7 @@ templ sidebar(c *templum.PageContext) {
 	</div>
 }
 
-templ content(data string) {
+templ content(c *templum.PageContext, data string) {
 	<section id="search-results" class="hidden flex-1 p-4 max-w-prose">
 		<div class="prose dark:prose-invert">
 			<h1>
@@ -101,7 +101,7 @@ templ content(data string) {
 		<div id="search-results-list"></div>
 	</section>
 	<main id="main" class="p-4 prose dark:prose-invert">
-		@templum.Markdown(data)
+		@templum.Markdown(c, data)
 	</main>
 }
 
