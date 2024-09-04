@@ -44,6 +44,10 @@ The config file contains the site base url and the GitHub url:
 github_url: "https://github.com/cugu/templum"
 logo: "templum.svg"
 title: "templum"
+
+d2_sketch: false  # default
+d2_theme_name: "Vanilla nitro cola"  # see for more themes: https://pkg.go.dev/oss.terrastruct.com/d2/d2themes/d2themescatalog
+d2_layout: degre  # default, optional: elk
 ```
 
 ### Folders and Markdown files

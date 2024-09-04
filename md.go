@@ -17,6 +17,7 @@ import (
 	"go.abhg.dev/goldmark/anchor"
 	"go.abhg.dev/goldmark/mermaid"
 	"mvdan.cc/xurls/v2"
+	"oss.terrastruct.com/d2/d2layouts/d2elklayout"
 	"oss.terrastruct.com/d2/d2themes/d2themescatalog"
 )
 
@@ -43,6 +44,12 @@ func md2html(config map[string]string, md string) (string, error) {
 
 				break
 			}
+		}
+	}
+
+	if d2Layout, ok := config["d2_layout"]; ok {
+		if d2Layout == "elk" {
+			d2Settings.Layout = d2elklayout.DefaultLayout
 		}
 	}
 
