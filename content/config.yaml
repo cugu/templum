@@ -5,3 +5,7 @@ title: "templum"
 d2_sketch: false
 d2_theme_name: "Vanilla nitro cola"
 d2_layout: degre
+style: |
+    .prose {
+        max-width: 120ch !important;
+    }
