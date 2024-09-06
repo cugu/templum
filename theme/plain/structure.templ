@@ -10,6 +10,9 @@ templ html(c *templum.PageContext, data string) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<link href={ c.BaseURL + "favicon.ico" } rel="icon"/>
 			<link href={ c.BaseURL + "style.css" } rel="stylesheet"/>
+			if _, ok := c.Config["style"]; ok {
+				<link href={ c.BaseURL + "custom.css" } rel="stylesheet"/>
+			}
 		</head>
 		<body class="bg-white dark:bg-gray-800 dark:text-gray-100">
 			@frame(header(c), sidebar(c), content(c, data), footer(c))

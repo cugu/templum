@@ -28,6 +28,9 @@ func (t Theme) Render(ctx context.Context, context *templum.SiteContext) (fs.FS,
 	memoryFS["style.css"] = &templum.MemoryFile{Data: static.CSS}
 	memoryFS["main.js"] = &templum.MemoryFile{Data: static.JS}
 	memoryFS["search.js"] = &templum.MemoryFile{Data: []byte(string(searchJS(context.Pages)) + string(static.SearchJS))}
+	if style, ok := context.Config["style"]; ok {
+		memoryFS["custom.css"] = &templum.MemoryFile{Data: []byte(string(style))}
+	}
 
 	return memoryFS, nil
 }
