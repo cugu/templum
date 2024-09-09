@@ -4,7 +4,7 @@ go 1.23.0
 
 require (
 	github.com/FurqanSoftware/goldmark-d2 v0.0.0-20240222042550-23ef2a4e585c
-	github.com/a-h/templ v0.2.771
+	github.com/a-h/templ v0.2.778
 	github.com/alecthomas/chroma/v2 v2.14.0
 	github.com/stefanfritsch/goldmark-fences v1.0.0
 	github.com/yuin/goldmark v1.7.4
@@ -13,6 +13,7 @@ require (
 	go.abhg.dev/goldmark/mermaid v0.5.0
 	gopkg.in/yaml.v3 v3.0.1
 	mvdan.cc/xurls/v2 v2.5.0
+	oss.terrastruct.com/d2 v0.6.3
 )
 
 require (
@@ -42,6 +43,5 @@ require (
 	golang.org/x/text v0.17.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
 	gonum.org/v1/plot v0.14.0 // indirect
-	oss.terrastruct.com/d2 v0.6.3 // indirect
 	oss.terrastruct.com/util-go v0.0.0-20231101220827-55b3812542c2 // indirect
 )
