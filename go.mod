@@ -12,7 +12,7 @@ require (
 	go.abhg.dev/goldmark/anchor v0.1.1
 	go.abhg.dev/goldmark/mermaid v0.5.0
 	gopkg.in/yaml.v3 v3.0.1
-	mvdan.cc/xurls/v2 v2.5.0
+	mvdan.cc/xurls/v2 v2.6.0
 	oss.terrastruct.com/d2 v0.6.6
 )
 
@@ -38,7 +38,7 @@ require (
 	golang.org/x/exp v0.0.0-20231127185646-65229373498e // indirect
 	golang.org/x/image v0.18.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
-	golang.org/x/sys v0.23.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/term v0.23.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
