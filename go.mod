@@ -34,13 +34,13 @@ require (
 	github.com/mazznoer/csscolorparser v0.1.3 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	golang.org/x/crypto v0.26.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20231127185646-65229373498e // indirect
 	golang.org/x/image v0.18.0 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
-	golang.org/x/term v0.23.0 // indirect
-	golang.org/x/text v0.17.0 // indirect
+	golang.org/x/term v0.27.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
 	gonum.org/v1/plot v0.14.0 // indirect
 	oss.terrastruct.com/util-go v0.0.0-20231101220827-55b3812542c2 // indirect
