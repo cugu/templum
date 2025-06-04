@@ -1,28 +1,42 @@
+version: "2"
 run:
   timeout: 5m
   tests: false
 linters:
-  # enable-all: true
   disable:
     - contextcheck
     - depguard
     - err113
     - errchkjson
-    - execinquery
     - exhaustruct
     - goconst
-    - gomnd
     - ireturn
     - lll
     - mnd
     - varnamelen
     - wrapcheck
-linters-settings:
-  gci:
-    sections:
-      - standard
-      - default
-      - prefix(github.com/cugu/templum)
-issues:
-  exclude-dirs:
-    - theme
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - theme
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - prefix(github.com/cugu/templum)
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
