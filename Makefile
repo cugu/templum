@@ -1,7 +1,7 @@
 .PHONY: install
 install:
 	@echo "Installing..."
-	go install github.com/a-h/templ/cmd/templ@v0.2.747
+	go install github.com/a-h/templ/cmd/templ@v0.3.906
 	npm install tailwindcss@latest @tailwindcss/typography
 
 .PHONY: install-dev
