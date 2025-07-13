@@ -5,9 +5,9 @@ go 1.23.0
 require (
 	github.com/FurqanSoftware/goldmark-d2 v0.0.0-20240222042550-23ef2a4e585c
 	github.com/a-h/templ v0.3.906
-	github.com/alecthomas/chroma/v2 v2.17.2
+	github.com/alecthomas/chroma/v2 v2.19.0
 	github.com/stefanfritsch/goldmark-fences v1.0.0
-	github.com/yuin/goldmark v1.7.11
+	github.com/yuin/goldmark v1.7.12
 	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc
 	go.abhg.dev/goldmark/anchor v0.2.0
 	go.abhg.dev/goldmark/mermaid v0.5.0
