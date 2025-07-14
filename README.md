@@ -2,7 +2,7 @@
 
 # templum
 
-A static site generator for [templ](https://github.com/a-h/templ).
+A static site generator.
 
 ## Install
 
