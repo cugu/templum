@@ -2,6 +2,7 @@ package templum
 
 import (
 	"fmt"
+	"html/template"
 	"io/fs"
 	"maps"
 	"os"
@@ -28,7 +29,8 @@ type SiteContext struct {
 type PageContext struct {
 	*SiteContext
 
-	Page *Page
+	Page    *Page
+	Content template.HTML
 }
 
 func newSiteContext(baseURL, contentPath string) (*SiteContext, error) {

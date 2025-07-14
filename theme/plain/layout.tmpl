@@ -1,0 +1,60 @@
+<html class="no-js">
+<head>
+    <title>{{ .Page.Title }}</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="{{ .BaseURL }}favicon.ico" rel="icon"/>
+    <link href="{{ .BaseURL }}style.css" rel="stylesheet"/>
+    {{- if index .Config "style" }}<link href="{{ .BaseURL }}custom.css" rel="stylesheet"/>{{ end }}
+</head>
+<body class="bg-white dark:bg-gray-800 dark:text-gray-100">
+<div id="frame" class="flex min-h-screen w-full overflow-x-hidden">
+  <aside id="sidebar" class="fixed w-10/12 md:w-64 flex flex-col h-full md:h-screen z-20">
+    <div class="overflow-y-auto w-full h-full">
+      <div class="min-h-full min-w-full p-4 border-r dark:border-gray-600 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:bg-gray-800 dark:text-gray-100 space-y-2">
+        {{ logo . }}
+        {{ nav . }}
+      </div>
+    </div>
+  </aside>
+  <div class="flex flex-col flex-1 md:ml-64 overflow-hidden">
+    <div id="overlay" class="fixed w-full h-full bg-black z-10 transition-opacity opacity-0 hidden cursor-pointer"></div>
+    <header class="sticky top-0 w-full flex flex-row">
+      <div class="min-h-full min-w-full p-4 flex flex-col md:flex-row text-gray-800 dark:text-gray-100">
+        <div class="flex flex-row w-full sm:w-64 md:hidden">
+          <div class="py-3 mr-2">{{ menu_toggle }}</div>
+          {{ logo . }}
+        </div>
+        <div class="flex flex-row flex-1 items-center justify-between space-x-2 mt-2 sm:mt-0">
+          <div>
+            <div class="hide-no-js relative flex items-center space-x-2 m-0 w-full md:w-96">
+              <input id="search" type="text" name="q" placeholder="Search" class="pl-10 py-2 pr-10 text-gray-700 dark:bg-gray-700 dark:text-gray-100 w-full rounded-lg border dark:border-gray-600"/>
+              <div class="absolute">{{ magnifyingGlass }}</div>
+              <span id="search-clear" class="absolute right-0 pr-2 text-gray-700 dark:text-gray-100 cursor-pointer">{{ x }}</span>
+            </div>
+          </div>
+          <div class="hidden md:flex flex-row">{{ github_link . }}</div>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1">
+      <section id="search-results" class="hidden flex-1 p-4 max-w-prose">
+        <div class="prose dark:prose-invert">
+          <h1>Search results</h1>
+        </div>
+        <div id="search-results-list"></div>
+      </section>
+      <main id="main" class="p-4 prose dark:prose-invert">{{ .Content }}</main>
+    </main>
+    <footer>
+      <div class="md:hidden flex justify-between p-4 bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 border-t-2 dark:border-gray-600">
+        {{ github_link . }}
+      </div>
+    </footer>
+  </div>
+</div>
+<script>var base_url = '{{ .BaseURL }}';</script>
+<script src="{{ .BaseURL }}main.js"></script>
+<script src="{{ .BaseURL }}search.js"></script>
+</body>
+</html>

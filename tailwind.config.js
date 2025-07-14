@@ -19,8 +19,9 @@ const defaultCss = {
 module.exports = {
     content: [
         "./theme/plain/static/in.css",
+        "./theme/plain/theme.go",
+        "./theme/plain/layout.templ",
         "./theme/**/*.js",
-        "./theme/**/*.templ",
         "./content/**/*.md"
     ],
     safelist: [

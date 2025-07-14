@@ -2,11 +2,9 @@ package templum
 
 import (
 	"bytes"
-	"context"
-	"io"
+	"html/template"
 
 	d2 "github.com/FurqanSoftware/goldmark-d2"
-	"github.com/a-h/templ"
 	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
 	fences "github.com/stefanfritsch/goldmark-fences"
 	"github.com/yuin/goldmark"
@@ -94,15 +92,11 @@ func md2html(config map[string]string, md string) (string, error) {
 	return htmlBuffer.String(), nil
 }
 
-func Markdown(c *PageContext, md string) templ.Component {
-	return templ.ComponentFunc(func(_ context.Context, w io.Writer) error {
-		s, err := md2html(c.Config, md)
-		if err != nil {
-			return err
-		}
+func Markdown(c *PageContext, md string) (template.HTML, error) {
+	s, err := md2html(c.Config, md)
+	if err != nil {
+		return "", err
+	}
 
-		_, err = io.WriteString(w, s)
-
-		return err
-	})
+	return template.HTML(s), nil
 }

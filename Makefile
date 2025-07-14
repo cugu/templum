@@ -1,8 +1,7 @@
 .PHONY: install
 install:
 	@echo "Installing..."
-	go install github.com/a-h/templ/cmd/templ@v0.3.906
-	npm install tailwindcss@latest @tailwindcss/typography
+	npm install tailwindcss@3 @tailwindcss/typography
 
 .PHONY: install-dev
 install-dev: install
@@ -15,7 +14,6 @@ install-dev: install
 .PHONY: local_generate
 local_generate:
 	@echo "Generating..."
-	templ generate
 	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
 	go run ./cmd/templum/. --content content --output public --url "http://localhost:8080/"
 
@@ -30,7 +28,6 @@ fmt:
 	gci write -s standard -s default -s "prefix(github.com/cugu/templum)" .
 	gofumpt -l -w .
 	wsl -fix ./... || true
-	templ fmt .
 
 .PHONE: lint
 lint:
