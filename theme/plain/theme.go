@@ -3,14 +3,13 @@ package plain
 import (
 	"bytes"
 	"context"
+	_ "embed"
 	"encoding/json"
 	"html"
 	"html/template"
 	"io/fs"
 	"maps"
 	"strings"
-
-	_ "embed"
 
 	"github.com/cugu/templum"
 	"github.com/cugu/templum/theme/plain/static"
@@ -45,6 +44,7 @@ func (t Theme) Render(ctx context.Context, context *templum.SiteContext) (fs.FS,
 	memoryFS["style.css"] = &templum.MemoryFile{Data: static.CSS}
 	memoryFS["main.js"] = &templum.MemoryFile{Data: static.JS}
 	memoryFS["search.js"] = &templum.MemoryFile{Data: []byte(string(searchJS(context.Pages)) + string(static.SearchJS))}
+
 	if style, ok := context.Config["style"]; ok {
 		memoryFS["custom.css"] = &templum.MemoryFile{Data: []byte(string(style))}
 	}
@@ -133,6 +133,7 @@ func searchIndex(pages []*templum.Page) []map[string]string {
 // helper template functions
 func navHTML(c *templum.PageContext) template.HTML {
 	var sb strings.Builder
+
 	writeNav(&sb, c, c.Pages, 0)
 
 	return template.HTML(sb.String())
@@ -140,10 +141,13 @@ func navHTML(c *templum.PageContext) template.HTML {
 
 func writeNav(sb *strings.Builder, c *templum.PageContext, pages []*templum.Page, depth int) {
 	sb.WriteString(`<nav class="flex flex-col space-y-2`)
+
 	if depth > 0 {
 		sb.WriteString(` pt-2`)
 	}
+
 	sb.WriteString(`">`)
+
 	for _, p := range pages {
 		if p.Type() == templum.Section {
 			writeSection(sb, c, p, depth)
@@ -151,41 +155,50 @@ func writeNav(sb *strings.Builder, c *templum.PageContext, pages []*templum.Page
 			writeLink(sb, c, p)
 		}
 	}
+
 	sb.WriteString(`</nav>`)
 }
 
 func writeSection(sb *strings.Builder, c *templum.PageContext, p *templum.Page, depth int) {
 	sb.WriteString(`<details`)
+
 	if strings.HasPrefix(c.Page.Link(), p.Link()) {
 		sb.WriteString(` open`)
 	}
+
 	sb.WriteString(`>`)
-	sb.WriteString(`<summary class="flex justify-between toggle block p-2 rounded cursor-pointer w-full hover:bg-gray-200 dark:hover:bg-gray-700`)
+	sb.WriteString(`<summary class="flex justify-between toggle block p-2 rounded-sm cursor-pointer w-full hover:bg-gray-200 dark:hover:bg-gray-700`)
+
 	if strings.HasPrefix(c.Page.Link(), p.Link()) {
 		sb.WriteString(` active font-bold`)
 	}
+
 	sb.WriteString(`">`)
 	sb.WriteString(html.EscapeString(p.Title()))
 	sb.WriteString(`<div class="chevron">`)
 	sb.WriteString(chevron())
 	sb.WriteString(`</div></summary>`)
+
 	if len(p.Children()) > 0 {
 		sb.WriteString(`<div class="pl-1">`)
 		writeNav(sb, c, p.Children(), depth+1)
 		sb.WriteString(`</div>`)
 	}
+
 	sb.WriteString(`</details>`)
 }
 
 func writeLink(sb *strings.Builder, c *templum.PageContext, p *templum.Page) {
 	sb.WriteString(`<a href="`)
 	sb.WriteString(html.EscapeString(c.BaseURL + p.Link()))
-	sb.WriteString(`" class="block p-2 rounded w-full hover:bg-gray-200 dark:hover:bg-gray-700`)
+	sb.WriteString(`" class="block p-2 rounded-sm w-full hover:bg-gray-200 dark:hover:bg-gray-700`)
+
 	if c.Page.Link() == p.Link() {
 		sb.WriteString(` font-bold bg-gray-200 dark:bg-gray-700`)
 	} else {
 		sb.WriteString(` font-normal`)
 	}
+
 	sb.WriteString(`">`)
 	sb.WriteString(html.EscapeString(p.Title()))
 	sb.WriteString(`</a>`)
@@ -193,14 +206,18 @@ func writeLink(sb *strings.Builder, c *templum.PageContext, p *templum.Page) {
 
 func logo(c *templum.PageContext) template.HTML {
 	var sb strings.Builder
+
 	sb.WriteString(`<a href="` + html.EscapeString(c.BaseURL) + `">`)
 	sb.WriteString(`<div class="flex flex-row flex-1 my-1.5">`)
+
 	if logoPath, ok := c.Config["logo"]; ok {
 		sb.WriteString(`<img src="` + html.EscapeString(c.BaseURL+logoPath) + `" alt="logo" class="h-8 mr-2"/>`)
 	}
+
 	if title, ok := c.Config["title"]; ok {
 		sb.WriteString(`<h1 class="text-2xl font-bold">` + html.EscapeString(title) + `</h1>`)
 	}
+
 	sb.WriteString(`</div></a>`)
 
 	return template.HTML(sb.String())
@@ -211,10 +228,13 @@ func githubLink(c *templum.PageContext) template.HTML {
 	if !ok {
 		return ""
 	}
+
 	var sb strings.Builder
+
 	sb.WriteString(`<a href="` + html.EscapeString(url) + `" class="hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-600 font-bold py-2 px-4 rounded-lg flex ml-2 flex-row space-x-2">`)
 	sb.WriteString(github())
 	sb.WriteString(`<span>GitHub</span></a>`)
+
 	return template.HTML(sb.String())
 }
 

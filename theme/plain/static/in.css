@@ -1,35 +1,75 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
-    .note {
-        @apply p-4 my-6 text-gray-800 rounded-lg bg-gray-50 border dark:bg-gray-700 dark:text-gray-300 border-gray-400;
-    }
+@config '../../../tailwind.config.js';
 
-    .tip {
-        @apply p-4 my-6 text-green-800 rounded-lg bg-green-50 border dark:bg-gray-700 dark:text-green-400 border-green-400;
-    }
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
 
-    .info {
-        @apply p-4 my-6 text-purple-800 rounded-lg bg-purple-50 border dark:bg-gray-700 dark:text-purple-400 border-purple-400;
-    }
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
-    .warning {
-        @apply p-4 my-6 text-yellow-800 rounded-lg bg-yellow-50 border dark:bg-gray-700 dark:text-yellow-400 border-yellow-400;
-    }
+@utility note {
+  @apply p-4 my-6 text-gray-800 rounded-lg bg-gray-50 border dark:bg-gray-700 dark:text-gray-300 border-gray-400;
 
-    .critical, .caution {
-        @apply p-4 my-6 text-red-800 rounded-lg bg-red-50 border dark:bg-gray-700 dark:text-red-300 border-red-300;
-    }
+  & > * {
+    @apply mx-1 my-0;
+  }
+}
 
-    .note > *, .tip > *, .info > *, .warning > *, .critical > *, .caution > * {
-        @apply mx-1 my-0;
-    }
+@utility tip {
+  @apply p-4 my-6 text-green-800 rounded-lg bg-green-50 border dark:bg-gray-700 dark:text-green-400 border-green-400;
 
-    .anchor {
-        @apply no-underline text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400;
-    }
+  & > * {
+    @apply mx-1 my-0;
+  }
+}
+
+@utility info {
+  @apply p-4 my-6 text-purple-800 rounded-lg bg-purple-50 border dark:bg-gray-700 dark:text-purple-400 border-purple-400;
+
+  & > * {
+    @apply mx-1 my-0;
+  }
+}
+
+@utility warning {
+  @apply p-4 my-6 text-yellow-800 rounded-lg bg-yellow-50 border dark:bg-gray-700 dark:text-yellow-400 border-yellow-400;
+
+  & > * {
+    @apply mx-1 my-0;
+  }
+}
+
+@utility critical {
+  @apply p-4 my-6 text-red-800 rounded-lg bg-red-50 border dark:bg-gray-700 dark:text-red-300 border-red-300;
+
+  & > * {
+    @apply mx-1 my-0;
+  }
+}
+
+@utility caution {
+  @apply p-4 my-6 text-red-800 rounded-lg bg-red-50 border dark:bg-gray-700 dark:text-red-300 border-red-300;
+
+  & > * {
+    @apply mx-1 my-0;
+  }
+}
+
+@utility anchor {
+  @apply no-underline text-gray-300 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400;
 }
 
 /* common */

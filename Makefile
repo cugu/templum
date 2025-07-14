@@ -1,20 +1,14 @@
-.PHONY: install
-install:
-	@echo "Installing..."
-	npm install tailwindcss@3 @tailwindcss/typography
-
 .PHONY: install-dev
-install-dev: install
+install-dev:
 	@echo "Installing..."
 	npm install -D live-server@latest
 	go install github.com/bombsimon/wsl/v4/cmd...@v4.4.1
-	go install mvdan.cc/gofumpt@v0.7.0
-	go install github.com/daixiang0/gci@v0.13.4
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.2.2
 
 .PHONY: local_generate
 local_generate:
 	@echo "Generating..."
-	npx tailwindcss -i ./theme/plain/static/in.css -o ./theme/plain/static/style.css
+	tailwindcss --input ./theme/plain/static/in.css --output ./theme/plain/static/style.css
 	go run ./cmd/templum/. --content content --output public --url "http://localhost:8080/"
 
 .PHONY: serve
@@ -25,9 +19,9 @@ serve:
 .PHONY: fmt
 fmt:
 	@echo "Formatting..."
-	gci write -s standard -s default -s "prefix(github.com/cugu/templum)" .
-	gofumpt -l -w .
+	go mod tidy
 	wsl -fix ./... || true
+	golangci-lint fmt ./...
 
 .PHONE: lint
 lint:

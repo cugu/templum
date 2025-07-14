@@ -36,6 +36,7 @@ func md2html(config map[string]string, md string) (string, error) {
 				break
 			}
 		}
+
 		for _, theme := range d2themescatalog.DarkCatalog {
 			if theme.Name == d2ThemeName {
 				d2Settings.ThemeID = &theme.ID
