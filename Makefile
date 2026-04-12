@@ -8,9 +8,12 @@ install:
 install-dev: install
 	@echo "Installing..."
 	npm install -D live-server@latest
-	go install github.com/bombsimon/wsl/v4/cmd...@v4.4.1
-	go install mvdan.cc/gofumpt@v0.7.0
-	go install github.com/daixiang0/gci@v0.13.4
+
+.PHONY: install_golangci_lint
+install_golangci_lint:
+	@echo "Installing..."
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(shell go env GOPATH)/bin v2.11.4
+	@echo "Done Installing."
 
 .PHONY: local_generate
 local_generate:
@@ -27,9 +30,7 @@ serve:
 .PHONY: fmt
 fmt:
 	@echo "Formatting..."
-	gci write -s standard -s default -s "prefix(github.com/cugu/templum)" .
-	gofumpt -l -w .
-	wsl -fix ./... || true
+	golangci-lint fmt ./...
 	templ fmt .
 
 .PHONE: lint
