@@ -12,6 +12,12 @@ install-dev: install
 	go install mvdan.cc/gofumpt@v0.7.0
 	go install github.com/daixiang0/gci@v0.13.4
 
+.PHONY: install_golangci_lint
+install_golangci_lint:
+	@echo "Installing..."
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(shell go env GOPATH)/bin v2.11.4
+	@echo "Done Installing."
+
 .PHONY: local_generate
 local_generate:
 	@echo "Generating..."
