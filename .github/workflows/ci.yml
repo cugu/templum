@@ -13,9 +13,10 @@ jobs:
       - uses: actions/setup-go@v6
         with: { go-version-file: go.mod }
 
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v9
-        with: { version: vv2.11.4 }
+      - name: Lint
+        run: |
+          make install_golangci_lint
+          make lint
 
   fmt:
     name: Fmt
@@ -28,6 +29,7 @@ jobs:
       - name: Fmt
         run: |
           make install-dev
+          make install_golangci_lint
           make fmt
 
   test:
