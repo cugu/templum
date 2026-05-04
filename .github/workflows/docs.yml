@@ -25,7 +25,7 @@ jobs:
         with: { go-version-file: go.mod }
       - name: Build
         run: go run ./cmd/templum/. --content content --output public --url "https://cugu.github.io/templum/"
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
