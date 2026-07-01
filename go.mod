@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/FurqanSoftware/goldmark-d2 v0.0.0-20240222042550-23ef2a4e585c
 	github.com/a-h/templ v0.3.1020
-	github.com/alecthomas/chroma/v2 v2.26.1
+	github.com/alecthomas/chroma/v2 v2.27.0
 	github.com/stefanfritsch/goldmark-fences v1.0.0
 	github.com/yuin/goldmark v1.8.2
 	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20230729083705-37449abec8cc
@@ -22,7 +22,7 @@ require (
 	github.com/alecthomas/chroma v0.10.0 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/dlclark/regexp2 v1.12.0 // indirect
-	github.com/dlclark/regexp2/v2 v2.1.1 // indirect
+	github.com/dlclark/regexp2/v2 v2.2.1 // indirect
 	github.com/dop251/goja v0.0.0-20231027120936-b396bb4c349d // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
